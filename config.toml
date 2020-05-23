@@ -86,6 +86,7 @@ enableEmoji = true
     [params.page.toc]
       enable = true
       auto = true
+      keepStatic = false
     [params.page.code]
       copy = true
       maxShownLines = 20
@@ -96,6 +97,9 @@ enableEmoji = true
       Linkedin = true
     [params.page.comment]
       enable = false
+
+  [params.cookieconsent]
+    enable = false
 
 [markup]
 defaultMarkdownHandler = "goldmark"
