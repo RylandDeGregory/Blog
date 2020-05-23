@@ -48,7 +48,7 @@ enableEmoji = true
 
 [params]
   # LoveIt theme version
-  version = "0.2.9"
+  version = "0.2.X"
   defaultTheme = "auto"
   gitRepo = "https://github.com/RylandDeGregory/Blog"
   [params.header]
