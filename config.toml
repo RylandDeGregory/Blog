@@ -1,0 +1,162 @@
+baseURL = "https://ryland.dev/"
+title = "Ryland DeGregory"
+languageCode = "en"
+hasCJKLanguage = false
+copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
+
+theme = "LoveIt"
+themesDir = "themes/"
+
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    pre = ""
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title is shown on hover
+    title = ""
+    weight = 1
+  [[menu.main]]
+    identifier = "categories"
+    pre = ""
+    post = ""
+    name = "Categories"
+    url = "/categories/"
+    title = ""
+    weight = 2
+  [[menu.main]]
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "About"
+    url = "/about/"
+    title = ""
+    weight = 3
+  [[menu.main]]
+    identifier = "github"
+    pre = "<i class='fab fa-github fa-fw'></i>"
+    post = ""
+    name = ""
+    url = "https://github.com/RylandDeGregory/Blog"
+    title = "GitHub"
+    weight = 6
+
+[params]
+  # LoveIt theme version
+  version = "0.2.X"
+  defaultTheme = "auto"
+  gitRepo = "https://github.com/RylandDeGregory/Blog"
+  [params.header]
+    [params.header.title]
+      name = "Ryland DeGregory"
+  [params.footer]
+    enable = true
+    hugo = false
+    copyright = true
+    author = true
+    since = 2020
+  [params.home]
+  rss = 10
+  [params.home.profile]
+      enable = true
+      avatarURL = "/images/avatar.png"
+      title = ""
+      subtitle = "DevOps. Trance. eSports."
+      typeit = true
+      social = true
+  [params.home.posts]
+      enable = true
+      paginate = 5
+  [params.social]
+  GitHub = "RylandDeGregory"
+  Linkedin = "ryland-degregory"
+  Twitter = "rcdeg"
+  Soundcloud = "ryland-degregory"
+  Spotify = "cale1008"
+
+  [params.page]
+  fontawesome = true
+  lightgallery = true
+  linkToMarkdown = true
+    [params.page.toc]
+      enable = true
+      auto = true
+    [params.page.code]
+      copy = true
+      maxShownLines = 20
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = true
+      Linkedin = true
+    [params.page.comment]
+      enable = false
+
+[markup]
+defaultMarkdownHandler = "goldmark"
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+        definitionList = true
+        footnote = true
+        linkify = true
+        strikethrough = true
+        table = true
+        taskList = true
+        typographer = true
+    [markup.goldmark.parser]
+        attribute = true
+        autoHeadingID = true
+        autoHeadingIDType = "github"
+    [markup.goldmark.renderer]
+        hardWraps = false
+        unsafe = true
+        xHTML = false
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+
+[author]
+  name = "Ryland DeGregory"
+  email = "ryland@rylanddegregory.com"
+  twitter = "rcdeg"
+  website = "https://ryland.dev/about"
+
+[privacy]
+  [privacy.twitter]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[deployment]
+  order = [".jpg$", ".gif$"]
+  [[deployment.targets]]
+  name = "azure blob storage"
+
+  # see https://gocloud.dev/howto/blob/#azure
+  URL = "azblob://$web"
+
+  [[deployment.matchers]]
+    # cache static assets for 1 year.
+    pattern = "^.+\\.(js|css|svg|ttf)$"
+    cacheControl = "max-age=31536000, no-transform, public"
+    gzip = true
+
+    [[deployment.matchers]]
+    pattern = "^.+\\.(png|jpg)$"
+    cacheControl = "max-age=31536000, no-transform, public"
+    gzip = false
+
+    [[deployment.matchers]]
+    pattern = "^.+\\.(html|xml|json)$"
+    gzip = true
