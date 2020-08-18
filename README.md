@@ -1,11 +1,14 @@
-[![GitHub Actions CI/CD](https://github.com/RylandDeGregory/Blog/workflows/CI/CD/badge.svg?branch=master)](https://github.com/RylandDeGregory/Blog/actions?query=workflow%3ACI%2FCD)
+![Azure Static Web Apps CI/CD](https://github.com/RylandDeGregory/Blog/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg)
 
 This is the repository for my personal blog, [https://ryland.dev/](https://ryland.dev).
 
+#### Update 8/16/20
+
+I have migrated this blog to an Azure Static Web App. See [this blog post](https://ryland.dev/posts) for more information.
+
 #### I'm utilizing the following stack
 
-- **Hosting:** [Azure Blob Storage Static Websites](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website)
-- **SSL/CDN:** [Azure CDN - Verizon Premium](https://docs.microsoft.com/en-us/azure/cdn/cdn-create-a-storage-account-with-cdn)
+- **Hosting:** [Azure Static Web Apps](https://azure.microsoft.com/en-us/services/app-service/static/)
 - **Domain/DNS:** [Google Domains](https://domains.google)
 - **Static Site Engine (SSE):** [Hugo](https://gohugo.io)
   - **Theme:** [LoveIt](https://hugoloveit.com/)
