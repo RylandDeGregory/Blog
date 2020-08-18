@@ -19,6 +19,6 @@ Outside technology, I love electronic music, video games, and hiking. I have a v
 
 #### Follow me on MixCloud
 
-Find DJ mixes of my favorite Trance and Techno music from the past 30 years.
+Find [DJ mixes](https://www.mixcloud.com/rylanddegregory/) of my favorite Trance and Techno music from the past 30 years.
 
 <p align="center"><iframe width="200" height="250" src="https://www.mixcloud.com/widget/follow/?u=%2Frylanddegregory%2F&hide_followers=1" frameborder="0" ></iframe></p>
