@@ -2,11 +2,11 @@
 name: CI/CD
 
 # Trigger the workflow on push or pull request events, but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
 
 env:
   hugoVersion: '0.70.0'
