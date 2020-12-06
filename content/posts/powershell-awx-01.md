@@ -1,7 +1,7 @@
 ---
 title: "Using PowerShell with Ansible AWX: Part 1"
 date: 2020-12-05T19:00:00-05:00
-draft: true
+draft: false
 author: "Ryland DeGregory"
 authorlink: "/about/"
 categories:
@@ -202,9 +202,9 @@ Once the containers are up and running, the AWX application will begin initializ
 sudo docker logs -f awx_task
 ```
 
-Once the AWX bootstrap and database initialization process is complete, you should see log entries similar to those in the following screenshot, indicating that AWX was installed successfully. ![awx_task bootstrap logs](images/powershell-awx/awx-task-logs.png)
+Once the database initialization and AWX bootstrap process is complete, you should see log entries within the `awx_task` container similar to those in the following screenshot, indicating that AWX was installed successfully. ![awx_task bootstrap logs](images/powershell-awx/awx-task-logs.png)
 
-In a web browser on your workstation, navigate to the IP address or hostname of the Virtual Machine hosting the AWX containers, and you should be able to log into the application using the default `admin` credentials:
+From a web browser on your workstation, navigate to the IP address or hostname of the Virtual Machine hosting the AWX containers, and you should be able to login to the application using the default `admin` credentials:
 
 ```Text
 Username: admin
@@ -215,4 +215,4 @@ Password: password
 
 ## Running PowerShell 7 scripts on AWX
 
-See [part 2] of this 3 part series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.
+See [part 2](https://ryland.dev/posts/powershell-awx-part2) of this 3 part series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.
