@@ -215,4 +215,4 @@ Password: password
 
 ## Running PowerShell 7 scripts on AWX
 
-See [part 2](https://ryland.dev/posts/powershell-awx-part2) of this 3 part series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.
+See [part 2](/posts/powershell-awx-02) of this 3 part series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.

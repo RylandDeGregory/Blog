@@ -4,7 +4,7 @@ This is the repository for my personal blog, [https://ryland.dev/](https://rylan
 
 #### Update 8/16/20
 
-I have migrated this blog to an Azure Static Web App. See [this blog post](https://ryland.dev/posts) for more information.
+I have migrated this blog to an Azure Static Web App. See [this blog post](https://ryland.dev/posts/azure-static-webapp) for more information.
 
 #### I'm utilizing the following stack
 
