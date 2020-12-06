@@ -10,7 +10,7 @@ categories:
 - AWX
 ---
 
-Now that PowerShell [runs on Mac and Linux](https://github.com/PowerShell/PowerShell), it's able to shine in many more use cases. This includes leveraging the power of the open-source configuration management & automation platform [RedHat Ansible AWX](https://github.com/ansible/awx) to run PowerShell 7 commands / scripts within Ansible Playbooks.
+Now that PowerShell [runs on Mac and Linux](https://github.com/PowerShell/PowerShell), it's able to shine in many more use cases, including leveraging the power of the open source configuration management & automation platform [RedHat Ansible AWX](https://github.com/ansible/awx) to run PowerShell 7 commands & scripts within Ansible Playbooks.
 
 <!--more-->
 
