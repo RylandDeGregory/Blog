@@ -9,7 +9,7 @@ categories:
 - PowerShell
 ---
 
-Azure doesn't let you rename virtual machine objects after provisioning. Who knew? Here's how to fix it.
+Azure doesn't let you rename Virtual Machine resources after provisioning. Here's how to fix it.
 
 <!--more-->
 

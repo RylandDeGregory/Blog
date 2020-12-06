@@ -20,9 +20,9 @@ The process and configuration outlined in this article (and subsequent articles 
 
 ## Ansible AWX, Simple IT Automation
 
-[Ansible](https://github.com/ansible/ansible) is incredible. Built on Python and expressed in YAML [Playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html), Ansible enables [idempotent](https://en.wikipedia.org/wiki/Idempotence) agentless configuration management over SSH/WinRM. AWX (short for Ansible-Worx), is a platform that enables scheduling, RBAC, logging, and workflow orchestration of Ansible Playbooks.
+[Ansible](https://github.com/ansible/ansible) is incredible. Built on Python and expressed in YAML [Playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html), Ansible enables [idempotent](https://en.wikipedia.org/wiki/Idempotence) agentless configuration management over SSH/WinRM. AWX is a automation platform that enables scheduling, RBAC, logging, and workflow orchestration of Ansible Playbooks.
 
-> This series of articles will not cover any information on how to use Ansible. For that, check out [Jeff Geerling's Ansible 101 series](https://www.jeffgeerling.com/blog/2020/ansible-101-jeff-geerling-youtube-streaming-series).
+> This series of articles will not cover any information regarding how to use Ansible. For that, check out [Jeff Geerling's Ansible 101 series](https://www.jeffgeerling.com/blog/2020/ansible-101-jeff-geerling-youtube-streaming-series).
 
 ## Extending Ansible with scripting
 
@@ -41,8 +41,6 @@ Setting up a [Windows Host](https://docs.ansible.com/ansible/latest/user_guide/w
 ## Adding PowerShell 7 to AWX
 
 AWX is released as a [Docker image](https://hub.docker.com/r/ansible/awx), meaning that it can be customized to fit each user's needs. For this guide, we will be adding PowerShell 7, as well as authentication libraries to communicate with Windows systems using [PSRemoting](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_remote?view=powershell-7.1) with NTLM.
-
-### Custom AWX Dockerfile
 
 The quickest and easiest way of getting up and running is to utilize the Dockerfile below to create a custom AWX image with PowerShell 7. The `gssntlmssp` package is used to allow PowerShell to remotely-authenticate to Windows hosts using NTLM.
 
