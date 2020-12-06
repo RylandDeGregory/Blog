@@ -15,7 +15,7 @@ Now that PowerShell [runs on Mac and Linux](https://github.com/PowerShell/PowerS
 <!--more-->
 
 {{% admonition type=warning title="Before reading on" open=true %}}
-The process and configuration outlined in this article (and subsequent articles in this series) are based on an extremely niche use case, and should be taken with a grain of salt. I am sharing my experience with this process because I have been extremely satisfied with the results over the last year.
+The process and configuration outlined in this article (and subsequent articles in this series) is based on an extremely niche use case, and should be taken with a grain of salt. I am sharing my experience with this process because I have been extremely satisfied with the results over the last year.
 {{% /admonition %}}
 
 ## Ansible AWX, Simple IT Automation
