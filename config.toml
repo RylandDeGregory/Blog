@@ -66,7 +66,7 @@ enableEmoji = true
       enable = true
       avatarURL = "/images/avatar.png"
       title = ""
-      subtitle = "DevOps. Trance. eSports."
+      subtitle = "DevOps | Cloud | Automation"
       typeit = true
       social = true
   [params.home.posts]
