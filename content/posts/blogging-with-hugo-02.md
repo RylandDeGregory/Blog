@@ -1,5 +1,5 @@
 ---
-title: "Blogging with Hugo and Azure Part 2"
+title: "Blogging with Hugo and Azure: Part 2"
 author: "Ryland DeGregory"
 authorlink: "/about/"
 date: 2020-03-19T18:06:58-04:00
