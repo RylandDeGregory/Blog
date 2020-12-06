@@ -12,6 +12,7 @@ categories:
 I ran into an -- admittedly unique -- issue wherein I needed to tag hundreds of MP3 files with the proper Artist, Genre, Album, etc. Often, downloaded MP3 files will not have the tags populated. On Windows, you can edit tags manually using File Explorer, but on my MacBook Pro, I use a program like [Rekordbox](https://rekordbox.com/en/) to set MP3 tags.
 
 <!--more-->
+
 {{% admonition type=tip title="Tip" open=true %}}
 If you just want the code, you can find it on [GitHub](https://github.com/RylandDeGregory/PSTagLib).
 {{% /admonition %}}

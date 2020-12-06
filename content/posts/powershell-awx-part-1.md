@@ -1,16 +1,15 @@
 ---
 title: "Using PowerShell with Ansible AWX: Part 1"
-date: 2020-12-05T19:29:35-05:00
+date: 2020-12-05T19:00:00-05:00
 draft: true
 author: "Ryland DeGregory"
 authorlink: "/about/"
 categories:
 - PowerShell
 - Ansible
-- AWX
 ---
 
-Now that PowerShell [runs on Mac and Linux](https://github.com/PowerShell/PowerShell), it's able to shine in many more use cases, including leveraging the power of the open source configuration management & automation platform [RedHat Ansible AWX](https://github.com/ansible/awx) to run PowerShell 7 commands & scripts within Ansible Playbooks.
+Now that PowerShell [runs on Mac and Linux](https://github.com/PowerShell/PowerShell), it's able to shine in many more use cases, including leveraging the power of the open source configuration management & automation platform [RedHat Ansible AWX](https://github.com/ansible/awx) to execute PowerShell 7 commands & scripts within Ansible Playbooks, directly on the Ansible control node.
 
 <!--more-->
 

@@ -3,6 +3,7 @@ title: "Rename Azure VM"
 author: "Ryland DeGregory"
 authorlink: "/about/"
 date: 2020-05-22T18:28:52-04:00
+lastmod: 2020-12-06T13:00:00-05:00
 draft: false
 categories:
 - Azure
@@ -27,7 +28,7 @@ Wow. Ok, no problem. We'll just change the resource names!
 
 Azure said no.
 
-## The solution -- again -- PowerShell
+## The solution -- PowerShell
 
 We came up with the short PowerShell script below to "rename" an Azure virtual machine. This is done by copying the original Azure VM resource into a PowerShell object, creating a new VM with the same configuration, but the name in lower case (or whatever other transformation you want to make, just change `$newVMName`), and attaching all of the subordinate resources of the original VM (tags, disks, network interfaces) to the new VM.
 
