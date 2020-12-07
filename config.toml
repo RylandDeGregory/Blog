@@ -64,14 +64,14 @@ enableEmoji = true
   rss = 10
   [params.home.profile]
       enable = true
-      avatarURL = "/images/avatar.png"
+      avatarURL = "/images/avatar.jpg"
       title = ""
       subtitle = "DevOps | Cloud | Automation"
       typeit = true
       social = true
   [params.home.posts]
       enable = true
-      paginate = 5
+      paginate = 10
   [params.social]
   GitHub = "RylandDeGregory"
   Linkedin = "ryland-degregory"
