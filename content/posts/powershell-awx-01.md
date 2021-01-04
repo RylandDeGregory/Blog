@@ -171,7 +171,7 @@ The following steps to install AWX are considered least-effort to get a working 
     unzip awx-15.0.1.zip && cd awx-15.0.1
     ```
 
-1. Edit the AWX installer `inventory` file for a customized install.
+1. Edit the AWX installer *inventory* file for a customized install.
     1. `vi inventory` (use whatever text editor you are comfortable with).
     1. Update the `dockerhub_base` variable to the Docker Hub username hosting the custom AWX image.
 
@@ -185,8 +185,10 @@ The following steps to install AWX are considered least-effort to get a working 
         postgres_data_dir="/opt/awx/pgdocker"
         docker_compose_dir="/opt/awx/awxcompose"
         ```
+    
+    1. You can change the default AWX admin account **username** and **password** values by modifying the `admin_user` and `admin_password` variables.
 
-    1. Write the changes to the file and Quit vi by pressing `esc`, then typing `:wq!`.
+    1. Write the changes to the file and quit vi by pressing `esc`, then typing `:wq!`.
 
 1. Run the AWX installer using the `ansible-playbook` CLI tool.
 
@@ -196,7 +198,7 @@ The following steps to install AWX are considered least-effort to get a working 
 
 The Ansible Playbook `install.yml` will deploy AWX using the custom Docker image that includes PowerShell. Once complete, the output should look similar to the following screenshot. ![AWX installer output](images/powershell-awx/install-yml-output.png)
 
-Once the containers are up and running, the AWX application will begin initializing the PostgreSQL database and configuring itself. You can track its progress by executing the following command to view the logs of the `awx_task` container.
+Once the containers are up and running, the AWX application will begin initializing the PostgreSQL database and redis socket in separate containers (using the official DockerHub images for those applications) and configuring itself. You can track its progress by executing the following command to view the logs of the `awx_task` container.
 
 ```Shell
 sudo docker logs -f awx_task
@@ -204,7 +206,7 @@ sudo docker logs -f awx_task
 
 Once the database initialization and AWX bootstrap process is complete, you should see log entries within the `awx_task` container similar to those in the following screenshot, indicating that AWX was installed successfully. ![awx_task bootstrap logs](images/powershell-awx/awx-task-logs.png)
 
-From a web browser on your workstation, navigate to the IP address or hostname of the Virtual Machine hosting the AWX containers, and you should be able to login to the application using the default `admin` credentials:
+From a web browser on your workstation, navigate to the IP address or hostname of the Virtual Machine hosting the AWX containers (if using an Azure VM, ensure it has a Public IP or is deployed to a Subnet that is accessible from your workstation). You will be see the AWX login page and should authenticate using the default `admin` username and password (if you didn't previously set custom values in the AWX installer's *inventory* file):
 
 ```Text
 Username: admin
