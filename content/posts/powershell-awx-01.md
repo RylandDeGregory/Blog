@@ -198,7 +198,7 @@ The following steps to install AWX are considered least-effort to get a working 
 
 The Ansible Playbook `install.yml` will deploy AWX using the custom Docker image that includes PowerShell. Once complete, the output should look similar to the following screenshot. ![AWX installer output](images/powershell-awx/install-yml-output.png)
 
-Once the containers are up and running, the AWX application will begin initializing the PostgreSQL database and redis socket in separate containers (using the official DockerHub images for those applications) and configuring itself. You can track its progress by executing the following command to view the logs of the `awx_task` container.
+Once the containers are up and running, the AWX application will begin initializing the PostgreSQL database and [redis instance](https://github.com/ansible/awx/blob/devel/docs/websockets.md#broadcast-backplane) in separate containers (using the official DockerHub images for those applications) and configuring itself. You can track its progress by executing the following command to view the logs of the `awx_task` container.
 
 ```Shell
 sudo docker logs -f awx_task
