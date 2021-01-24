@@ -9,13 +9,13 @@ categories:
 - Ansible
 ---
 
-Now that you have a containerized deployment of AWX with PowerShell (see [part 1](posts/powershell-awx-01)), you can start to leverage the additional capabilities it provides within your Ansible Playbooks.
+Now that you have a containerized deployment of AWX with PowerShell (see [part 1](/posts/powershell-awx-01)), you can start to leverage the additional capabilities it provides within your Ansible Playbooks.
 
 <!--more-->
 
 ## PowerShell in Ansible
 
-Over the last year or so, I've found that there are 2 main ways to run PowerShell code from within a Playbook, not counting the more-traditional approach of using a [Windows Bridge Host](posts/powershell-awx-01#what-about-a-windows-bridge-host) to execute PowerShell code on a Windows-based machine. Each method allows for varying levels of complexity and control, depending on the desired outcome.
+Over the last year or so, I've found that there are 2 main ways to run PowerShell code from within a Playbook, not counting the more-traditional approach of using a [Windows Bridge Host](/posts/powershell-awx-01#what-about-a-windows-bridge-host) to execute PowerShell code on a Windows-based machine. Each method allows for varying levels of complexity and control, depending on the desired outcome.
 
 ### Single, direct commands
 
