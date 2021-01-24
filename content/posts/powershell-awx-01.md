@@ -185,7 +185,7 @@ The following steps to install AWX are considered least-effort to get a working 
         postgres_data_dir="/opt/awx/pgdocker"
         docker_compose_dir="/opt/awx/awxcompose"
         ```
-    
+
     1. You can change the default AWX admin account **username** and **password** values by modifying the `admin_user` and `admin_password` variables.
 
     1. Write the changes to the file and quit vi by pressing `esc`, then typing `:wq!`.
@@ -217,4 +217,4 @@ Password: password
 
 ## Running PowerShell 7 scripts on AWX
 
-See [part 2](/posts/powershell-awx-02) of this 3 part series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.
+See [part 2](/posts/powershell-awx-02) of this series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.
