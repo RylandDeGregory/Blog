@@ -13,7 +13,7 @@ My passion for computers and technology began at age 15 when I built my first ga
 
 My previous experience spans media, education, web, and manufacturing industries in the 6 years I've worked in enterprise IT environments. From managing a support queue, to designing custom gaming/workstation desktops, to racking SAN and server hardware, automating virtual machine resource scaling using PowerCLI, and building Azure Pipelines to automate Kubernetes deployments, I'm fortunate to have a diverse background in both traditional and cloud environments, at businesses ranging from 2 employees to 200,000.
 
-I've earned [multiple professional certifications](https://www.youracclaim.com/users/ryland-degregory/badges) on the Azure and AWS platforms, including [Microsoft Certified: DevOps Engineer Expert](https://docs.microsoft.com/en-us/learn/certifications/devops-engineer), and I can't wait to work towards more!
+I've earned [multiple professional certifications](https://www.youracclaim.com/users/ryland-degregory/badges) on the Azure and AWS platforms, and I can't wait to work towards more!
 
 Outside technology, I love electronic music, video games, and hiking. I have a voracious propensity for organization and spend my free time with my girlfriend and a great group of friends travelling and attending music festivals.
 
