@@ -5,8 +5,6 @@ lastmod: 2021-01-22T23:15:00-05:00
 draft: false
 ---
 
-# Ryland DeGregory
-
 I'm an IT Engineer working on public cloud (Azure &amp; AWS) and VMware infrastructure lifecycle automation, process improvement, and infrastructure modernization.
 
 My passion for computers and technology began at age 15 when I built my first gaming desktop. I was offered my first enterprise internship, as a level 2 desktop support technician, at 16. Since then, my passion has shifted from consumer hardware to DevOps and infrastructure automation, and thusly from plugging in front-panel headers to writing endless YAML files and PowerShell scripts.
