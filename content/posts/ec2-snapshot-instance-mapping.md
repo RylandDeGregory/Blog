@@ -4,6 +4,9 @@ date: 2021-02-02T18:32:54-05:00
 draft: false
 author: "Ryland DeGregory"
 authorlink: "/about/"
+categories:
+- AWS
+- PowerShell
 ---
 
 When working with AWS Backup, it can sometimes (often) become difficult to correlate which EBS Volume or EC2 Instance generated each Snapshot (and subsequently is responsible for its cost), especially since the AWS Cost and Usage Report can include millions of line items for large enterprises.
