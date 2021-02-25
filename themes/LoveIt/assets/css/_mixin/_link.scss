@@ -9,6 +9,12 @@
     }
   }
 
+  a.author {
+    [theme=dark] & {
+      color: if($dark, $single-link-color-dark, $single-link-color-dark);
+    }
+  }
+
   a:active,
   a:hover {
     color: if($light, $global-link-hover-color, $single-link-hover-color);
