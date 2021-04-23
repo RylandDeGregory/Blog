@@ -1,7 +1,8 @@
 {
-    "git.enableCommitSigning": true,
-    "azureFunctions.deploySubpath": "api",
-    "azureFunctions.projectLanguage": "PowerShell",
+    "azureFunctions.deploySubpath": ".",
+    "azureFunctions.postDeployTask": "npm install",
+    "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~3",
-    "debug.internalConsoleOptions": "neverOpen"
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "npm prune"
 }

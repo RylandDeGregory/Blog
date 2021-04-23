@@ -4,11 +4,20 @@
 		{
 			"type": "func",
 			"command": "host start",
-			"problemMatcher": "$func-powershell-watch",
+			"problemMatcher": "$func-node-watch",
 			"isBackground": true,
-			"options": {
-				"cwd": "${workspaceFolder}/api"
-			}
+			"dependsOn": "npm install"
+		},
+		{
+			"type": "shell",
+			"label": "npm install",
+			"command": "npm install"
+		},
+		{
+			"type": "shell",
+			"label": "npm prune",
+			"command": "npm prune --production",
+			"problemMatcher": []
 		}
 	]
 }

@@ -2,11 +2,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach to PowerShell Functions",
-            "type": "PowerShell",
+            "name": "Attach to Node Functions",
+            "type": "node",
             "request": "attach",
-            "customPipeName": "AzureFunctionsPSWorker",
-            "runspaceId": 1,
+            "port": 9229,
             "preLaunchTask": "func: host start"
         }
     ]
