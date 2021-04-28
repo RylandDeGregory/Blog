@@ -1,0 +1,43 @@
+# CI/CD Pipeline for building & deploying a Hugo static website to Azure Blob Storage, fronted by Azure CDN.
+# Uses GitHub Hosted agents.
+# AZURE_STORAGE_ACCOUNT and AZURE_STORAGE_KEY must be defined as GitHub repository secrets.
+name: CI/CD
+
+# Trigger the workflow on push or pull request events, but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  hugoVersion: '0.82.1'
+  storageAccount: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Download Hugo
+      run: |
+        wget -c 'https://github.com/gohugoio/hugo/releases/download/v${{ env.hugoVersion }}/hugo_extended_${{ env.hugoVersion }}_Linux-64bit.deb'
+
+    - name: Install Hugo
+      run: |
+        sudo dpkg -i hugo_extended_${{ env.hugoVersion }}_Linux-64bit.deb
+
+    - name: Generate Blog
+      run: |
+        hugo --log -v
+
+    # Prevent hugo deploy from deleting files with '--maxDeletes -1'
+    - name: Deploy Blog
+      run: |
+        hugo deploy --maxDeletes -1
+      env:
+        AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        AZURE_STORAGE_ACCOUNT: ${{ env.StorageAccount }}
