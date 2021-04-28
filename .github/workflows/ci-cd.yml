@@ -1,6 +1,6 @@
-# CI/CD Pipeline for building & deploying a Hugo static website to Azure Blob Storage.
+# CI/CD Pipeline for building & deploying a Hugo static website to Azure Blob Storage, fronted by Azure CDN.
 # Uses GitHub Hosted agents.
-# AZURE_STORAGE_KEY must be defined as a GitHub repository secret.
+# AZURE_STORAGE_ACCOUNT and AZURE_STORAGE_KEY must be defined as GitHub repository secrets.
 name: CI/CD
 
 # Trigger the workflow on push or pull request events, but only for the master branch
