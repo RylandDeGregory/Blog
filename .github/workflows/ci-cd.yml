@@ -12,7 +12,6 @@ on:
 
 env:
   hugoVersion: '0.82.1'
-  storageAccount: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
 
 jobs:
   build:
@@ -40,4 +39,4 @@ jobs:
         hugo deploy --maxDeletes -1
       env:
         AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
-        AZURE_STORAGE_ACCOUNT: ${{ env.StorageAccount }}
+        AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
