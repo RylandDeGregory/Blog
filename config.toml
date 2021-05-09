@@ -64,7 +64,7 @@ enableEmoji = true
   rss = 10
   [params.home.profile]
       enable = true
-      avatarURL = "/images/avatar.jpg"
+      avatarURL = "/images/avatar.webp"
       title = ""
       subtitle = "DevOps | Cloud | Automation"
       typeit = true
