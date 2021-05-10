@@ -1,17 +1,15 @@
 {
-  "name": "ryland.dev",
+  "name": "Ryland DeGregory",
+  "short_name": "ryland.dev",
   "lang": "en-US",
   "start_url": "/",
   "display": "standalone",
+  "theme_color": "#55bde2",
+  "background_color": "#282c35",
   "icons": [
     {
       "src": "icons/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mstile-150x150.png",
-      "sizes": "150x150",
       "type": "image/png"
     },
     {
