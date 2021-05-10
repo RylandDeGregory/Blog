@@ -167,12 +167,6 @@
       font-size: .875rem;
 
       @include link(false, false);
-
-      .post-tags {
-        padding: 0;
-
-        @include link(true, true);
-      }
     }
   }
 }
