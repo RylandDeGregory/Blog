@@ -51,6 +51,8 @@ enableEmoji = true
   version = "0.2.X"
   defaultTheme = "auto"
   gitRepo = "https://github.com/RylandDeGregory/Blog"
+  description = "Ryland DeGregory's technology blog"
+  keywords = ["Blog", "Hugo", "Technology", "Azure", "PowerShell"]
   [params.header]
     [params.header.title]
       name = "Ryland DeGregory"
