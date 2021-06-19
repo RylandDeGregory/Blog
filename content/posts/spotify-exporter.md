@@ -84,7 +84,7 @@ Now that you have your Spotify app credentials, you should follow the steps in m
 
 Once you have authorized your app with your profile, the web page returns an OAuth 2 Refresh Token that will be used by the Azure Functions to query your user profile data. Store the OAuth 2 Refresh Token as an Azure Key Vault Secret named `Spotify-RefreshToken`.
 
-The good news is, you will probably only have to do that once. As OAuth 2 Refresh Tokens are very long-living.
+The good news is, you will probably only have to do that once, as OAuth 2 Refresh Tokens are very long-living.
 
 ### Provision Azure Resources
 
@@ -107,7 +107,7 @@ Now, navigate to the **Identity** blade and enable the System assigned [Managed 
 
 #### Ensure the Function App can access your Key Vault
 
-Within the Azure Portal, navigate to the Resource page for your Azure Key Vault. Go to the **Access policies** blade and click "+ Add Access Policy". Grant *Get* Secret permissions, and when you "Select principal", paste the **Object ID** of the Function App's Managed Identity. Click "Add", then "Save" to add the Access Policy.
+Within the Azure Portal, navigate to the Resource page for your Azure Key Vault. Go to the **Access policies** blade and click "+ Add Access Policy". Add *Get* within Secret permissions, then "Select principal" and paste in the **Object ID** of the Function App's Managed Identity. Click "Add", then "Save" to add the Access Policy.
 
 ![Key Vault Function App RBAC](images/spotify-exporter/kv-functionapp-ap.png "Grant the Function App access to interact with the Key Vault.")
 
