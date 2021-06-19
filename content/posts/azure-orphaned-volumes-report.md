@@ -84,7 +84,7 @@ Just like the Azure Portal and Azure Resource Graph Explorer, you can use the sc
 
 ![Orphaned Azure Disks in a CSV report](images/azure-orphaned-volumes/orphaned-vols-report.png "Orphaned Azure Disks report in Finder")
 
-By default, the report is exported to the root of your user profile (`C:\Users\<username>\` on Windows or `Users/<username/` on MacOS and Linux), but you can specify a custom filesystem path by including the `-OutFile` parameter.
+By default, the report is exported to the root of your user profile (`C:\Users\<username>\` on Windows or `Users/<username/` on MacOS), but you can specify a custom filesystem path by including the `-OutFile` parameter.
 
 ```powershell
 ./Get-AzOrphanedVolumes.ps1 -GenerateReport -OutFile 'Users/ryland/Desktop/AzureOrphanedVolumes.csv'
