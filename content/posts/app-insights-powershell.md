@@ -1,7 +1,7 @@
 ---
 title: "Using Azure Application Insights SDK with PowerShell"
 date: 2021-08-28T12:41:08-04:00
-draft: true
+draft: false
 author: "Ryland DeGregory"
 authorlink: "/about/"
 ---
@@ -20,7 +20,7 @@ Follow the Microsoft Documentation guide to [create an Application Insights reso
 
 If you already have an Application Insights resource that you would like to use to monitor your PowerShell code, then just copy the Instrumentation Key for later use.
 
-## Azure Application Insights SDK with PowerShell (NuGet Package)
+## Azure Application Insights SDK with PowerShell
 
 Luckily, PowerShell is built on top of .NET and written primarily in C#, so we can easily leverage the Application Insights .NET SDK for monitoring our PowerShell code (in Azure Functions, Azure Automation, a Windows or Linux VM, or anywhere PowerShell can run!).
 
@@ -33,7 +33,7 @@ A direct link to all the required code can be found on GitHub as a gist: [PSAppI
 [NuGet](https://docs.microsoft.com/en-us/nuget/what-is-nuget), the package manager for .NET, allows you to import external packages into .NET projects such as C# applications. The [Azure Application Insights .NET SDK](https://www.nuget.org/packages/Microsoft.ApplicationInsights/) can be downloaded directly from NuGet.org as a `.nupkg` file, which can either be imported into Visual Studio for use in a .NET project, or can be extracted like an archive (think `.zip`) file to expose the underlying `.dll` files that are used to interact with Application Insights. As we are going to be using the `.dll` files with PowerShell, we will extract the `.nupkg` file.
 
 Download `microsoft.applicationinsights.nupkg` from [NuGet.org](https://www.nuget.org/packages/Microsoft.ApplicationInsights/).
-![Download .NET SDK](images/app-insights-powershell/AppInsightsdotnetSDKnuGet.png "Download Application Insights .NET SDK")
+![Download .NET SDK](images/app-insights-powershell/app-insights-ps-dotnet-sdk-download.png "Download Application Insights .NET SDK")
 
 Expand the `.nupkg` archive using PowerShell
 
@@ -114,4 +114,18 @@ try {
 }
 ```
 
-## Azure Application Insights SDK with PowerShell (AppInsights API)
+## View the custom events within Application Insights
+
+Within the [Azure Portal](https://portal.azure.com/), navigate to the Application Insights resource that you have connected to your PowerShell code. Then, navigate to the **Logs** blade under the **Monitoring** group.
+
+### View custom telemetry events
+
+Within the Kusto Query Language (KQL) query window, type `customEvents` and click **Run**. This will show the custom telemetry events that your PowerShell code has generated.
+
+![Custom Telemetry Events](images/app-insights-powershell/app-insights-ps-custom-events.png "View Application Insights Custom Telemetry Events")
+
+### View custom exception events
+
+Within the Kusto Query Language (KQL) query window, type `exceptions` and click **Run**. This will show the custom exception events that your PowerShell code has generated. You can see the two exceptions that were demonstrated above, one that is a custom message and one that is a caught exception from a `try/catch` block.
+
+![Custom Telemetry Events](images/app-insights-powershell/app-insights-ps-custom-exception.png "View Application Insights Custom Exception Events")
