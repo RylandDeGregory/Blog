@@ -102,6 +102,7 @@ You can also generate custom exceptions which are tracked within the Exceptions 
 ```powershell
 # Generate a custom exception
 $TelemetryClient.TrackException('This is my custom AppInsights exception')
+$TelemetryClient.Flush()
 ```
 
 This functionality is perfect for use within a `try/catch` block:
@@ -113,6 +114,7 @@ try {
 } catch {
     # Record the caught exception
     $TelemetryClient.TrackException($_.Exception)
+    $TelemetryClient.Flush()
 }
 ```
 
