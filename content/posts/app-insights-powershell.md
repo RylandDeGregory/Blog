@@ -22,6 +22,8 @@ If you already have an Application Insights resource that you would like to use 
 
 ## Azure Application Insights SDK with PowerShell
 
+![AppInsights and PowerShell](images/app-insights-powershell/app-insights-ps-header.png)
+
 Luckily, PowerShell is built on top of .NET and written primarily in C#, so we can easily leverage the Application Insights .NET SDK for monitoring our PowerShell code (in Azure Functions, Azure Automation, a Windows or Linux VM, or anywhere PowerShell can run!).
 
 {{% admonition type=note title="Note" open=false %}}
