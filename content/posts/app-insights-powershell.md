@@ -7,7 +7,7 @@ authorlink: "/about/"
 categories:
 - Azure
 - PowerShell
--APM
+- APM
 ---
 
 Azure Application Insights is Microsoft's Application Performance Monitoring (APM) service built on top of [Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/). Unfortunately, PowerShell is not one of the [officially supported languages](https://docs.microsoft.com/en-us/azure/azure-monitor/app/platforms) for the Application Insights SDK. But, it does work, and is actually pretty simple to set up.
