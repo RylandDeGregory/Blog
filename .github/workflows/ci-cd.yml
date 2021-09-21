@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
 env:
-  hugoVersion: '0.82.1'
+  hugoVersion: '0.88.1'
 
 jobs:
   build:
