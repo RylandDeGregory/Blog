@@ -11,7 +11,7 @@ My previous experience spans media, education, web, and manufacturing industries
 
 I'm a Microsoft Certified Azure Solutions Architect and DevOps Engineer with [multiple certifications](https://www.youracclaim.com/users/ryland-degregory/badges) for Azure, as well as an AWS Certified Solution Architect.
 
-Outside technology, I love electronic music, video games, and hiking. I have a voracious propensity for organization -- both digitally and physically -- and spend my free time with my girlfriend and a great group of friends. I'm very proud of my highly-curated Spotify playlists, and have recently been enjoying making DJ mixes and working on my technical writing through this blog. Thanks for reading!
+Outside technology, I love electronic music, video games, and hiking. I have a voracious propensity for organization -- both digitally and physically -- and spend my free time with my girlfriend and a great group of friends. I'm very proud of my highly-curated [Spotify playlists](https://open.spotify.com/user/cale1008/playlists), and have recently been enjoying making DJ mixes and working on my technical writing through this blog. Thanks for reading!
 
 #### Follow me on MixCloud
 
