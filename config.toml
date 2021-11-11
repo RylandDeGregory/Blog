@@ -68,7 +68,7 @@ enableEmoji = true
       enable = true
       avatarURL = "/images/avatar.webp"
       title = ""
-      subtitle = "DevOps | Cloud | Automation"
+      subtitle = "Cloud | DevOps | Automation"
       typeit = true
       social = true
   [params.home.posts]
