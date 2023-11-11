@@ -17,4 +17,4 @@ Outside technology, I love electronic music, video games, and hiking. I have a v
 
 ### Resume
 
-Available upon request. [Email me](mailto:contact@ryland.dev) for a copy, and view my professional credentials on [Credly](https://www.credly.com/users/ryland-degregory/badges).
+Available upon request. [Email me](mailto:contact@ryland.dev) for a copy, and view my professional credentials on [LinkedIn](https://www.linkedin.com/in/ryland-degregory/details/certifications/).
