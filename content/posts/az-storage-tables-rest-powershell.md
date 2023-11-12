@@ -346,3 +346,9 @@ The REST API will not provide a response message for Entity delete operations.
 You can view the results of the Entity removal within the Azure Portal or the [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
 ![Azure Table Remove Entity result](images/az-storage-tables-rest-powershell/table-entity-remove.png)
+
+## Next Steps
+
+To further enhance your experience when interacting with the Azure Tables REST API, you can explore creating your own [PowerShell module](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_modules) to wrap common Entity operations into re-usable commands.
+
+If you find yourself looking for more features, resilience, and performance from your key-value datastore, you can explore Azure Cosmos DB and its [Table API](https://learn.microsoft.com/en-us/azure/cosmos-db/table/introduction). This variant of Cosmos DB uses the [same REST API](https://learn.microsoft.com/en-us/rest/api/storageservices/table-service-rest-api) format that you can access directly from PowerShell, and [behaves very similarly](https://learn.microsoft.com/en-us/azure/cosmos-db/table/table-api-faq) to the Azure Storage Tables REST API.
