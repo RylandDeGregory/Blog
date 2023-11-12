@@ -9,7 +9,7 @@ categories:
 - PowerShell
 ---
 
-If you've worked with Azure Storage using PowerShell, you've probably used the [AzTable](https://www.powershellgallery.com/packages/AzTable/2.1.0) community module. But given this module's developer abandonment, to reduce reliance on third-party packages, and to use modern authentication, you can interact directly with Azure Tables using its [REST API](https://learn.microsoft.com/en-us/rest/api/storageservices/table-service-rest-api).
+If you've interacted with Azure Storage using PowerShell, you've probably come across the [AzTable](https://www.powershellgallery.com/packages/AzTable/2.1.0) community module. But, given this module's developer abandonment, to reduce reliance on third-party packages, and to enable modern authentication, you can interact directly with Azure Tables using its [REST API](https://learn.microsoft.com/en-us/rest/api/storageservices/table-service-rest-api).
 
 <!--more-->
 
@@ -17,13 +17,13 @@ If you've worked with Azure Storage using PowerShell, you've probably used the [
 
 ### What is Azure Tables?
 
-[Azure Tables](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-overview) is one of the easiest, cheapest ways to store schemaless [key-value](https://en.wikipedia.org/wiki/Key%E2%80%93value_database) data in the cloud. It allows developers, platform engineers, and operations administrators to easy integrate durable, flexible data storage into their applications without needing to provision or manage a full database. Azure Tables is also popular for use with serverless, event-driven applications due to its high throughput and low latency.
+[Azure Tables](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-overview) is one of the easiest, cheapest ways to store schemaless [key-value](https://en.wikipedia.org/wiki/Key%E2%80%93value_database) data in the cloud. It allows developers, platform engineers, and operations administrators to easily integrate durable, flexible data storage into their applications without needing to provision or manage a full database. Azure Tables is also popular for use with serverless, event-driven applications due to its high throughput and low latency.
 
 ### Accessing Azure Tables
 
 Like many Azure resources, Azure Tables supports access management configuration at both the [Control Plane and Data Plane](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane). Many developers will choose to use the [Azure SDK](https://devblogs.microsoft.com/azure-sdk/announcing-the-new-azure-data-tables-libraries/) to access the Data Plane, as it provides native abstractions for their language of choice and includes functionality such as authentication context management, retry logic, and rate limiting.
 
-However, PowerShell is not a supported language of the Azure SDK. Therefore, in order to perform Azure Tables Data Plane operations using PowerShell, developers and engineers must utilize alternative methods: community-provided PowerShell modules, manually manipulating the .NET SDK, or the REST API.
+However, PowerShell is not a [supported language](https://azure.github.io/azure-sdk/) of the Azure SDK. Therefore, to perform Azure Tables Data Plane operations using PowerShell, developers and engineers must utilize alternative methods: community-provided PowerShell modules, manually manipulating the .NET SDK, or the REST API.
 
 #### AzTable module
 
@@ -32,7 +32,7 @@ Azure Table Storage operations with PowerShell](https://learn.microsoft.com/en-u
 
 ## Setup
 
-Using the Azure Tables REST API with PowerShell is incredibly simple, and provides the most flexibility when interacting with the Data Plane.
+Using the Azure Tables REST API with PowerShell is incredibly simple and provides the most flexibility when interacting with the Data Plane.
 
 ### Install
 
@@ -44,11 +44,11 @@ In your implementation, you can choose to support either [Shared Key Authorizati
 
 #### Shared (Master) Key
 
-Shared Key Authorization is the standard way of authenticating Azure Tables REST API requests. The [Storage Account Key](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) provides full, administrative access to all Storage Account Data Plane operations, including creating, updating, and removing Azure Tables entities (records).
+Shared Key Authorization is the standard way of authenticating Azure Tables REST API requests. The [Storage Account Key](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) provides full, administrative access to all Storage Account Data Plane operations including creating, updating, and removing Azure Tables Entities (records).
 
-Using Shared Key Authorization with the REST API does not require the assignment of any [Data Plane Azure RBAC Roles](https://learn.microsoft.com/en-us/azure/storage/tables/authorize-access-azure-active-directory), and only requires that the calling principal has the ability to list the Storage Account Keys. Built-in Azure RBAC Roles that include this permission are: [Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) and [Reader and Data Access](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader-and-data-access).
+Using Shared Key Authorization with the REST API does not require the assignment of any [Data Plane Azure RBAC Roles](https://learn.microsoft.com/en-us/azure/storage/tables/authorize-access-azure-active-directory), and only requires that the calling principal can list the Storage Account Keys. Built-in Azure RBAC Roles that include this permission are: [Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) and [Reader and Data Access](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader-and-data-access).
 
-See the `AccessKey` #region of the above Gist for code examples.
+See the `AccessKey` #region of the [Gist](https://gist.github.com/RylandDeGregory/c65563d0b090fc32115be7025d1ce722) for code samples.
 
 #### Entra ID (OAuth)
 
@@ -56,7 +56,7 @@ Microsoft Entra ID Authorization is the modern, preferred way of authenticating 
 
 Access can be scoped to specific Data Plane operations by assigning either the [Storage Table Data Reader](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-table-data-reader) or the [Storage Table Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-table-data-contributor) built-in Azure RBAC Role.
 
-See the `OAuth` #region of the above Gist for code examples.
+See the `OAuth` #region of the [Gist](https://gist.github.com/RylandDeGregory/c65563d0b090fc32115be7025d1ce722) for code samples.
 
 ## Use
 
@@ -98,7 +98,7 @@ Disable-AzContextAutosave -Scope Process
 Connect-AzAccount -Identity
 ```
 
-Then, paste the required sample Azure Tables REST API code into the Runbook (see below for examples).
+Then, paste the required sample Azure Tables REST API code into the Runbook (see below for samples).
 
 ### Perform operations
 
@@ -115,14 +115,14 @@ All samples will reference a Storage Account named `sttabledemouse2dev` and an A
 
 #### Create Entity
 
-All Azure Tables Entities **require** the following attributes to be defined at creation time:
+All Azure Tables Entities **require** the following properties to be defined at creation time:
 
 - [PartitionKey](https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-the-table-service-data-model#partitionkey-property)
-    - Used to group data.
+    - Used to group Entities.
 - [RowKey](https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-the-table-service-data-model#rowkey-property)
-    - Must be unique within the Table.
+    - Used to uniquely identify an Entity within a Table.
 
-All other attributes are optional, and are based on the schema of the Entity being created. Azure Tables is a schemaless data store, so each Entity within the Table can potentially have different attributes defined. Below is a PowerShell code sample that creates an Azure Tables Entity with two user-defined properties: `Name` and `Status`.
+All other properties are optional and are based on the schema of the Entity being created. Azure Tables is a schemaless data store, so each Entity within the Table can potentially have different properties defined. Below is a PowerShell code sample that creates an Azure Tables Entity with two user-defined properties: `Name` and `Status`.
 
 ```PowerShell
 # Storage Account and Table details
@@ -202,7 +202,7 @@ The REST API will respond with a [PSCustomObject](https://learn.microsoft.com/en
 
 The Azure Tables REST API supports the [OData specification](https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities) for querying Entities.
 
-##### Get all Entities with a given PartitionKey
+##### Get all Entities with a specific PartitionKey
 
 Retrieve all Entities within an Azure Storage Table that share a `PartitionKey`.
 
@@ -235,7 +235,7 @@ The REST API will respond with an array of [PSCustomObjects](https://learn.micro
 
 ![PowerShell Query Entities response](images/az-storage-tables-rest-powershell/ps-response-query.png)
 
-##### Get all Entities in a given Table
+##### Get all Entities in a Table
 
 Pagination is required to retrieve all Entities within an Azure Storage Table. The following sample shows one potential pagination implementation.
 
@@ -273,7 +273,7 @@ The REST API will respond with an array of [PSCustomObjects](https://learn.micro
 
 #### Update Entity
 
-Update an existing Entity by providing the `PartitionKey` and `RowKey` attributes, along with an object representing the modified user-defined properties.
+Update an existing Entity by providing the `PartitionKey` and `RowKey` properties, along with an object representing the modified user-defined properties.
 
 ```PowerShell
 # Storage Account and Table details
