@@ -1,7 +1,7 @@
 ---
 title: "Using Azure Storage Tables REST API with PowerShell"
 date: 2023-09-11T20:34:50-04:00
-draft: true
+draft: false
 author: "Ryland DeGregory"
 authorlink: "/about/"
 categories:
