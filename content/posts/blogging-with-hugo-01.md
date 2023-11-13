@@ -223,6 +223,6 @@ Go view the site at the custom domain attached to the Azure CDN endpoint!
 
 ## Next Steps
 
-Check out [Part 2](posts/blogging-with-hugo-02) to set up a CI/CD Pipeline on Azure Pipelines and configure monitoring for the static site.
+Check out [Part 2](/posts/blogging-with-hugo-02) to set up a CI/CD Pipeline on Azure Pipelines and configure monitoring for the static site.
 
 Happy {cheap} blogging!
