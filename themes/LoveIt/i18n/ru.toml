@@ -59,6 +59,12 @@ other = "Ваш комментарий ..."
 
 [facebookLanguageCode]
 other = "ru_RU"
+
+[giscusLang]
+other = "ru"
+
+[walineLang]
+other = "ru-RU"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

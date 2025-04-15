@@ -1,29 +1,48 @@
-{{- if .content -}}
-    <style>
-        {{- .content | safeCSS -}}
-    </style>
-{{- else if strings.HasPrefix .source "<link" -}}
-    {{- safeHTML .source -}}
+{{- if strings.HasPrefix .Source "<link" -}}
+    {{- safeHTML .Source -}}
 {{- else -}}
-    {{- $href := .source -}}
-    {{- $integrity := .integrity -}}
-    {{- if (urls.Parse $href).Host | not -}}
-        {{- $res := resources.Get $href -}}
-        {{- with .template -}}
-            {{- $res = $res | resources.ExecuteAsTemplate . $.context -}}
+    {{- $href := .Source -}}
+    {{- $integrity := .Integrity -}}
+    {{- $resource := 0 -}}
+    {{- if $href | and (not (urls.Parse $href).Host) -}}
+        {{- $resource = resources.Get $href -}}
+        {{- with printf `%v.map` $href | resources.Get -}}
+            {{- .Publish -}}
         {{- end -}}
-        {{- with .toCSS -}}
-            {{- $options := . | merge (dict "outputStyle" "compressed") -}}
-            {{- $res = $res | toCSS $options -}}
-        {{- end -}}
-        {{- if .minify -}}
-            {{- $res = $res | minify -}}
-        {{- end -}}
-        {{- with .fingerprint -}}
-            {{- $res = $res | fingerprint . -}}
-            {{- $integrity = $res.Data.Integrity -}}
-        {{- end -}}
-        {{- $href = $res.RelPermalink -}}
     {{- end -}}
-    <link rel="stylesheet" href="{{ $href }}"{{ if .crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ with .attr }} {{ . | safeHTMLAttr }}{{ end }}>
+    {{- with .Content -}}
+        {{- $resource = resources.FromString $.Path . -}}
+    {{- end -}}
+    {{- if $resource -}}
+        {{- with .Template -}}
+            {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
+        {{- end -}}
+        {{- with .ToCSS -}}
+            {{- $resource = $resource | toCSS . -}}
+        {{- end -}}
+        {{- if .Minify -}}
+            {{- $resource = $resource | minify -}}
+        {{- end -}}
+        {{- with .Fingerprint -}}
+            {{- $resource = $resource | fingerprint . -}}
+            {{- $integrity = $resource.Data.Integrity -}}
+        {{- end -}}
+        {{- $href = $resource.RelPermalink -}}
+    {{- end -}}
+    {{- $attrs := printf `href="%v"` $href -}}
+    {{- if .Crossorigin -}}
+        {{- $attrs = ` crossorigin="anonymous"` | add $attrs -}}
+    {{- end -}}
+    {{- with $integrity -}}
+        {{- $attrs = printf ` integrity="%v"` . | add $attrs -}}
+    {{- end -}}
+    {{- with .Attr -}}
+        {{- $attrs = add " " . | add $attrs -}}
+    {{- end -}}
+    {{- if .Preload -}}
+        <link rel="preload" {{ $attrs | safeHTMLAttr }} as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" {{ $attrs | safeHTMLAttr }}></noscript>
+    {{- else -}}
+        <link rel="stylesheet" {{ $attrs | safeHTMLAttr }}>
+    {{- end -}}
 {{- end -}}
