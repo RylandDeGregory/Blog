@@ -1,11 +1,15 @@
-{{- $href := "" -}}
-{{- with .url -}}
-    {{- $href = . | relLangURL -}}
+{{- $destination := "" -}}
+{{- with .Url -}}
+    {{- $destination = . | relLangURL -}}
 {{- else -}}
-    {{- $template := .template | default "%v" -}}
-    {{- with .prefix -}}
-        {{- $template = . | strings.TrimSuffix "/" | printf "%v/%%v" -}}
+    {{- $template := .Template | default "%v" -}}
+    {{- with .Prefix -}}
+        {{- $template = . | printf "%v%%v" -}}
     {{- end -}}
-    {{- $href = printf (string $template) .id -}}
+    {{- $destination = printf (string $template) .Id -}}
 {{- end -}}
-{{- dict "href" $href "rel" "me" | merge . | partial "plugin/link.html" -}}
+{{- $rel := "me" -}}
+{{- with .Rel -}}
+    {{- $rel = printf "%v %v" $rel . -}}
+{{- end -}}
+{{- dict "Destination" $destination "Rel" $rel | merge . | partial "plugin/a.html" -}}

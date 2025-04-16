@@ -1,38 +1,31 @@
 {
   "name": "loveit-src",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "LoveIt theme source file",
   "private": true,
-  "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "babel-preset-minify": "^0.5.1",
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
     "babelify": "^10.0.0",
-    "browserify": "^16.5.0",
-    "core-js": "^3.6.4",
-    "husky": "^4.3.8",
-    "minimist": "^1.2.7",
+    "browserify": "^17.0.1",
+    "core-js": "^3.40.0",
+    "husky": "^9.1.7",
     "segmentit": "^2.0.3"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "babel": "npx babel src/js --out-file assets/js/theme.min.js --source-maps",
-    "build": "npm run babel && hugo -v --source=exampleSite --themesDir ../.. --gc",
-    "build-lunr-segmentit": "browserify src/lib/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env --presets minify",
-    "start": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender",
-    "start-production": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production",
-    "check": "htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external",
-    "copy": "rm -rf resources && cp -rf exampleSite/resources resources"
-  },
-  "resolutions": {
-    "minimist": "^1.2.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build && npm run copy && git add resources assets/js"
-    }
+    "prepare": "husky install",
+    "compile": "npx babel src/js --out-file assets/js/theme.js",
+    "compile-lunr-segmentit": "browserify src/lib/lunr/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env",
+    "hugo": "hugo --source exampleSite --buildDrafts --gc",
+    "hugo-development": "hugo --source exampleSite --buildDrafts --gc --minify --environment development",
+    "hugo-production": "hugo --source exampleSite --gc --minify --environment production",
+    "hugo-server": "hugo server --source exampleSite --buildDrafts --disableFastRender",
+    "hugo-server-development": "hugo server --source exampleSite --buildDrafts --disableFastRender --environment development",
+    "hugo-server-production": "hugo server --source exampleSite --minify --disableFastRender --environment production",
+    "htmlproofer": "htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true",
+    "copy-resources": "cp -rf exampleSite/resources ."
   },
   "repository": {
     "type": "git",

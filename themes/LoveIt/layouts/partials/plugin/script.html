@@ -1,25 +1,44 @@
-{{- if .content -}}
-    <script type="text/javascript">
-        {{- .content | safeJS -}}
-    </script>
-{{- else if strings.HasPrefix .source "<script" -}}
-    {{- safeHTML .source -}}
+{{- with .Content -}}
+    <script>{{ . | safeJS }}</script>
 {{- else -}}
-    {{- $src := .source -}}
-    {{- $integrity := .integrity -}}
-    {{- if (urls.Parse $src).Host | not -}}
-        {{- $res := resources.Get $src -}}
-        {{- with .template -}}
-            {{- $res = $res | resources.ExecuteAsTemplate . $.context -}}
+    {{- if strings.HasPrefix .Source "<script" -}}
+        {{- safeHTML .Source -}}
+    {{- else -}}
+        {{- $src := .Source -}}
+        {{- $integrity := .Integrity -}}
+        {{- if (urls.Parse $src).Host | not -}}
+            {{- $resource := resources.Get $src -}}
+            {{- with printf `%v.map` $src | resources.Get -}}
+                {{- .Publish -}}
+            {{- end -}}
+            {{- with .Template -}}
+                {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
+            {{- end -}}
+            {{- if .Minify -}}
+                {{- $resource = $resource | minify -}}
+            {{- end -}}
+            {{- with .Fingerprint -}}
+                {{- $resource = $resource | fingerprint . -}}
+                {{- $integrity = $resource.Data.Integrity -}}
+            {{- end -}}
+            {{- $src = $resource.RelPermalink -}}
         {{- end -}}
-        {{- if .minify -}}
-            {{- $res = $res | minify -}}
+        {{- $attrs := printf `src="%v"` $src -}}
+        {{- if .Crossorigin -}}
+            {{- $attrs = ` crossorigin="anonymous"` | add $attrs -}}
         {{- end -}}
-        {{- with .fingerprint -}}
-            {{- $res = $res | fingerprint . -}}
-            {{- $integrity = $res.Data.Integrity -}}
+        {{- with $integrity -}}
+            {{- $attrs = printf ` integrity="%v"` . | add $attrs -}}
         {{- end -}}
-        {{- $src = $res.RelPermalink -}}
+        {{- if .Async -}}
+            {{- $attrs = " async" | add $attrs -}}
+        {{- end -}}
+        {{- if .Defer -}}
+            {{- $attrs = " defer" | add $attrs -}}
+        {{- end -}}
+        {{- with .Attr -}}
+            {{- $attrs = add " " . | add $attrs -}}
+        {{- end -}}
+        <script {{ $attrs | safeHTMLAttr }}></script>
     {{- end -}}
-    <script type="text/javascript" src="{{ $src }}"{{ if .crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .async }} async{{ end }}{{ if .defer }} defer{{ end }}{{ with .attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
 {{- end -}}

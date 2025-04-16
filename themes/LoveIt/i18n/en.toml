@@ -58,6 +58,12 @@ other = "Your comment ..."
 
 [facebookLanguageCode]
 other = "en_US"
+
+[giscusLang]
+other = "en"
+
+[walineLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
@@ -192,4 +198,7 @@ other = "CHANGED"
 
 [deleted]
 other = "DELETED"
+
+[deprecated]
+other = "DEPRECATED"
 # === shortcodes/version.html ===
