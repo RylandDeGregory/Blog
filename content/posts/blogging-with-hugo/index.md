@@ -62,7 +62,7 @@ Having a website in one region is great, but frequent requests from geographical
 
 Azure CDN solves both of these problems, again for only pennies per month. Go to the Azure Marketplace and create a CDN profile, being sure to select **Premium Verizon** (which supports custom rules for url rewrites and redirects).
 
-![Azure CDN Profile Creation](images//cdn-profile.png "Create Azure CDN Profile")
+![Azure CDN Profile Creation](images/cdn-profile.png "Create Azure CDN Profile")
 
 ### Connect Storage Account to CDN
 
@@ -71,7 +71,7 @@ In the Storage Account, under the Settings group, there is a blade called **Stat
 
 > NOTE: After spending hours troubleshooting an error in the connection between the Storage Account and CDN, I found you need to go to the `$web` container, click on **Change access level** and set it to *Blob (anonymous read access for blobs only)*.
 
-![Change SA Access Level](images//change-access-level.png "Change container access level")
+![Change SA Access Level](images/change-access-level.png "Change container access level")
 
 On the **Azure CDN** blade of the Storage Account, create a CDN endpoint using the new profile. In the **Origin hostname** field, enter the primary endpoint from the Static website blade. Remove the `https://` and the trailing `/`. The value should look like `{storage_account_name}.{zone}.web.core.windows.net`.
 
@@ -86,15 +86,15 @@ These are the rules I have configured:
 
 #### URL Rewrites
 
-![URL Rewrites](images//url-rewrites.png "URL Re-Writes")
+![URL Rewrites](images/url-rewrites.png "URL Re-Writes")
 
 #### Enforce HTTPS
 
-![Enforce Https](images//enforce-https.png "Force HTTP to HTTPS")
+![Enforce Https](images/enforce-https.png "Force HTTP to HTTPS")
 
 #### Redirect Azureedge requests to custom domain
 
-![Redirect Azureedge](images//redirect-azureedge.png "Redirect to custom domain")
+![Redirect Azureedge](images/redirect-azureedge.png "Redirect to custom domain")
 
 ### Custom domain on Azure CDN
 
