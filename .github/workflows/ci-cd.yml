@@ -23,10 +23,10 @@ jobs:
 
     - name: Download Hugo
       run: |
-        wget -c 'https://github.com/gohugoio/hugo/releases/download/v${{ env.hugoVersion }}/hugo_extended_${{ env.hugoVersion }}_linux-amd64.deb'
+        wget -c 'https://github.com/gohugoio/hugo/releases/download/v${{ env.hugoVersion }}/hugo_extended_withdeploy_${{ env.hugoVersion }}_linux-amd64.deb'
     - name: Install Hugo
       run: |
-        sudo dpkg -i hugo_extended_${{ env.hugoVersion }}_linux-amd64.deb
+        sudo dpkg -i hugo_extended_withdeploy_${{ env.hugoVersion }}_linux-amd64.deb
 
     - name: Generate Blog
       run: |
