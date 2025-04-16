@@ -48,7 +48,7 @@ git commit -m "Initial commit"
 
 Then, follow the instructions on the Azure Repos homepage to **Push an existing repository from the command line**.
 
-![Azure Repos Empty](images/bloggingwithhugo2/repos-empty.png)
+![Azure Repos Empty](images/repos-empty.png)
 
 #### Import Repository from another Git hosting provider
 
@@ -70,25 +70,25 @@ I'd recommend reviewing the Azure Pipelines [YAML Schema](https://docs.microsoft
 
 To get started, go to the Pipelines page of Azure DevOps and **create a pipeline**.
 
-![New Pipeline](images/bloggingwithhugo2/new-pipeline.png)
+![New Pipeline](images/new-pipeline.png)
 
 Select where your code lives. I chose **GitHub** because that's where my repository is hosted. If you set up your Git repo on Azure DevOps, select **Azure Repos Git**.
 
-![Connect Pipeline to Repo](images/bloggingwithhugo2/pipelines-connect.png)
+![Connect Pipeline to Repo](images/pipelines-connect.png)
 
 If you selected GitHub, you will need to authorize the connection between your Azure DevOps project and your GitHub account. After doing so, you will see a list of your account's repositories.
 
-![GitHub Repos](images/bloggingwithhugo2/my-github-repos.png)
+![GitHub Repos](images/my-github-repos.png)
 
 Choose to use a **Starter pipeline**, which will be configured for use with the software stack I've chosen.
 
-![Starter YAML Pipeline](images/bloggingwithhugo2/starter-pipeline.png)
+![Starter YAML Pipeline](images/starter-pipeline.png)
 
 The starter pipeline shows the general file structure of a YAML pipeline, how to supply triggers, and how to select what agent pool you want to execute your pipeline. You can either use one of many [Microsoft hosted agent](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops) types, or [install the agent](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops) on your own server(s) and use them as members of the pool.
 
 Expanding the **Assistant** pane on the right side of the screen, the wide variety of built-in pipeline tasks is visible. Building images, working with docker, deploying and managing Azure resources, application publishing, and testing tasks are all available.
 
-![Azure Pipelines Tasks](images/bloggingwithhugo2/pipeline-tasks.png "Some of the many pipeline tasks")
+![Azure Pipelines Tasks](images/pipeline-tasks.png "Some of the many pipeline tasks")
 
 If it all seems a bit overwhelming, don't worry! Deploying Hugo to Azure Storage is incredibly simple, and won't even scratch the surface of capabilities that Azure Pipelines have to offer, but being able to leverage them in any capacity will expose you to the wide world of CI/CD, and hopefully spark an interest to go further with them.
 
@@ -120,11 +120,11 @@ variables:
 > Note: All of the tasks I use in this pipeline are single line scripts. Know that you can combine them all into a single multi-line script task, but I found it easier for debugging and auditing if I used a separate task for each command.
 
 - `steps` are the smallest unit of execution for a pipeline. Azure Pipelines follow a "stages -> jobs -> steps -> scripts/tasks" hierarchy, but for a simple pipeline like this, only one stage and one job are needed, meaning they can be omitted from the YAML file.
-  - The first step is a **script** task that uses `wget` to download the Hugo executable from GitHub. Note the use of the variable in the URL, so the correct version of Hugo is always downloaded.
-  - The second step is a **script** task that installs the debian package downloaded from GitHub.
-  - The third step is invoking the Hugo executable. From the root directory of the Git repository (which is cloned each time the pipeline is launched), running the Hugo executable will generate the website's HTML/CSS/JS from the Markdown content files.
-    - I have logging and verbose building turned on so I can review them if necessary in the pipeline build logs.
-  - The fourth step is the Hugo secret sauce (in my opinion). It provides an out-of-the-box integration to deploy a Hugo static site to Azure Storage. It's called [Hugo Deploy](https://gohugo.io/hosting-and-deployment/hugo-deploy/#azure-storage) and it trivializes the historically-complicated process of deploying a website to a hosting service.
+    - The first step is a **script** task that uses `wget` to download the Hugo executable from GitHub. Note the use of the variable in the URL, so the correct version of Hugo is always downloaded.
+    - The second step is a **script** task that installs the debian package downloaded from GitHub.
+    - The third step is invoking the Hugo executable. From the root directory of the Git repository (which is cloned each time the pipeline is launched), running the Hugo executable will generate the website's HTML/CSS/JS from the Markdown content files.
+        - I have logging and verbose building turned on so I can review them if necessary in the pipeline build logs.
+    - The fourth step is the Hugo secret sauce (in my opinion). It provides an out-of-the-box integration to deploy a Hugo static site to Azure Storage. It's called [Hugo Deploy](https://gohugo.io/hosting-and-deployment/hugo-deploy/#azure-storage) and it trivializes the historically-complicated process of deploying a website to a hosting service.
 
 My `azure-pipelines.yml` file is below. You can also find it on [GitHub](https://GitHub.com/RylandDeGregory/blog/blob/master/azure-pipelines.yml)
 
@@ -159,11 +159,11 @@ steps:
   displayName: 'Deploy Blog'
 ```
 
-![Complete Pipeline](images/bloggingwithhugo2/pipelines-complete.png)
+![Complete Pipeline](images/pipelines-complete.png)
 
 #### Hugo Deploy
 
-To configure [Hugo Deploy](https://gohugo.io/hosting-and-deployment/hugo-deploy/#azure-storage), edit the website's configuration file, `config.toml`. Create a [deployment] field, and set the configuration properties to deploy to Azure Storage.
+To configure [Hugo Deploy](https://gohugo.io/hosting-and-deployment/hugo-deploy/#azure-storage), edit the website's configuration file, `config.toml`. Create a `[deployment]` field, and set the configuration properties to deploy to Azure Storage.
 The important part is the `deployment target`, which specifies the container where the website is going to be hosted. Leaving the default of `$web` is correct, as this is what I set up when creating the Storage Account.
 
 ```TOML
@@ -193,9 +193,9 @@ It is absolutely imperative that the key/token are not disclosed, hard-coded, or
 For the purposes of this simple blog, I'll be storing my secret values in Azure Pipelines variables. Click the **Variables** button to view and edit them.
 Note that they live outside your repo, so if they are changed or deleted, or if the pipeline is deleted, they will be lost.
 
-![Pipeline Variables](images/bloggingwithhugo2/pipelines-variables-button.png)
+![Pipeline Variables](images/pipelines-variables-button.png)
 
-![My Pipeline Secret Variables](images/bloggingwithhugo2/pipelines-my-variables.png)
+![My Pipeline Secret Variables](images/pipelines-my-variables.png)
 
 #### Azure Key Vault - a true secrets store
 
@@ -207,17 +207,17 @@ To run the pipeline, you have multiple options. A trigger for master is configur
 
 View the triggers for the pipeline by clicking on the ellipses menu next to **Variables**. Ensure that **Continuous integration** is enabled.
 
-![Pipeline Triggers](images/bloggingwithhugo2/pipelines-triggers.png)
+![Pipeline Triggers](images/pipelines-triggers.png)
 
-![My Pipeline Triggers](images/bloggingwithhugo2/pipelines-my-triggers.png)
+![My Pipeline Triggers](images/pipelines-my-triggers.png)
 
 Save and run your pipeline! When the pipeline is launched, it opens the **Pipeline run** screen.
 
-![Pipeline Queued](images/bloggingwithhugo2/pipelines-queued.png)
+![Pipeline Queued](images/pipelines-queued.png)
 
 Each **job** can be clicked into to view logs.
 
-![Pipelines job](images/bloggingwithhugo2/pipelines-job.png)
+![Pipelines job](images/pipelines-job.png)
 
 If it completed successfully, you should now see your updated blog!
 

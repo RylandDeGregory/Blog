@@ -16,7 +16,7 @@ Everyone in the software & IT industry knows GitHub, home to "the world's larges
 
 ## GitHub Actions -- the new CI/CD on the block
 
-![Azure Repos Empty](images/github-actions/github-actions-slide.png)
+![Azure Repos Empty](images/github-actions-slide.png)
 
 GitHub is THE place for hosting your personal Git repository, or to contribute to your favorite open-source project.
 For years, you've been able to commit code, manage pull requests, and track bugs using the GitHub platform. Recently they added [GitHub Projects](https://github.com/features/project-management) for basic agile work management. Even more recently, GitHub decided to take on some major industry players by launching their own CI/CD (Build/Release) platform, [GitHub Actions](https://github.com/features/actions).
@@ -25,7 +25,7 @@ GitHub Actions directly competes with Jenkins, CircleCI, TravisCI, GitLab CI, et
 
 ## GitHub vs Azure DevOps
 
-I've been a huge fan of [Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/) for a while now. I've used them extensively to create multi-stage builds and deployments at my employer and in [managing the release lifecycle of this blog](/posts/blogging-with-hugo-02), and I find it to be one of the strongest CI/CD tools in the current market. Azure DevOps also provides best-in-class agile work management, Artifact storage, and integrated Test Plans. GitHub offers none of this, and Azure DevOps offers seamless integration with any GitHub resources. So, why would Microsoft try to directly compete with Azure DevOps when releasing new features to GitHub? Visibility and user base.
+I've been a huge fan of [Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/) for a while now. I've used them extensively to create multi-stage builds and deployments at my employer and in [managing the release lifecycle of this blog](posts/blogging-with-hugo-2), and I find it to be one of the strongest CI/CD tools in the current market. Azure DevOps also provides best-in-class agile work management, Artifact storage, and integrated Test Plans. GitHub offers none of this, and Azure DevOps offers seamless integration with any GitHub resources. So, why would Microsoft try to directly compete with Azure DevOps when releasing new features to GitHub? Visibility and user base.
 
 GitHub has over 40 million users and 100 million repositories, and those numbers don't lie. People like the GitHub platform, and want to use it wherever they can. This is why nearly every software development tool has a first-party GitHub integration. Despite all the competition, people stick with it. Microsoft saw this as an opportunity, as Azure DevOps (a re-branding of Team Foundation Services) is still used by mostly Windows developers, to get GitHub users off of tools like CircleCI, TravisCI, and Jenkins, onto a Microsoft CI/CD platform of one type or another. They decided that rather than pushing users to Azure DevOps CI/CD, they'd instead bring it to the users natively within GitHub.
 
@@ -33,7 +33,7 @@ Although Microsoft may be trying to eventually supplant Azure Pipelines with Git
 
 ## Migrating to GitHub Actions
 
-![Azure Pipelines to GitHub Actions](images/github-actions/pipelines-actions-migration.png)
+![Azure Pipelines to GitHub Actions](images/pipelines-actions-migration.png)
 
 When I heard that my employer might be considering migrating our enterprise platform from Azure DevOps to GitHub, I naturally wanted to look into GitHub Actions to see if there was any chance of converting our Pipelines. So, I started with the easiest pipeline I know, the Hugo deploy pipeline for this blog.
 
@@ -45,7 +45,7 @@ Unsurprisingly, GitHub Actions workflows are written in YAML (like almost every 
 You can learn more about the GitHub Actions Workflow Syntax in its [documentation](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows).
 {{% /admonition %}}
 
-In my previous post, [Blogging with Hugo and Azure Part 2](posts/blogging-with-hugo-02), I created a simple YAML pipeline for building and deploying this blog to Azure Storage. It's shown below.
+In my previous post, [Blogging with Hugo and Azure Part 2](posts/blogging-with-hugo-2), I created a simple YAML pipeline for building and deploying this blog to Azure Storage. It's shown below.
 
 {{< gist RylandDeGregory b2106fc30785d0d24a078c86a7e3f2e0 >}}
 
@@ -65,4 +65,4 @@ I can't say that Microsoft will one day kill off Azure DevOps. But if they do, I
 
 What I can say is that I've deleted the Azure DevOps project for this blog, and will be focusing on using it to try out the new functionality of GitHub whenever it becomes available. But, I won't be migrating the complex, multi-stage pipelines that my team rely on just yet...GitHub Actions has some maturing to do before it's ready for primetime.
 
-![Microsoft octocat](images/github-actions/microsoft-octocat.jpg)
+![Microsoft octocat](images/microsoft-octocat.jpg)

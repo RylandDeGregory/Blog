@@ -196,7 +196,7 @@ The following steps to install AWX are considered least-effort to get a working 
     sudo /usr/local/bin/ansible-playbook -i inventory install.yml
     ```
 
-The Ansible Playbook `install.yml` will deploy AWX using the custom Docker image that includes PowerShell. Once complete, the output should look similar to the following screenshot. ![AWX installer output](images/powershell-awx/install-yml-output.png)
+The Ansible Playbook `install.yml` will deploy AWX using the custom Docker image that includes PowerShell. Once complete, the output should look similar to the following screenshot. ![AWX installer output](images/install-yml-output.png)
 
 Once the containers are up and running, the AWX application will begin initializing the PostgreSQL database and [redis instance](https://github.com/ansible/awx/blob/devel/docs/websockets.md#broadcast-backplane) in separate containers (using the official DockerHub images for those applications) and configuring itself. You can track its progress by executing the following command to view the logs of the `awx_task` container.
 
@@ -204,7 +204,7 @@ Once the containers are up and running, the AWX application will begin initializ
 sudo docker logs -f awx_task
 ```
 
-Once the database initialization and AWX bootstrap process is complete, you should see log entries within the `awx_task` container similar to those in the following screenshot, indicating that AWX was installed successfully. ![awx_task bootstrap logs](images/powershell-awx/awx-task-logs.png)
+Once the database initialization and AWX bootstrap process is complete, you should see log entries within the `awx_task` container similar to those in the following screenshot, indicating that AWX was installed successfully. ![awx_task bootstrap logs](images/awx-task-logs.png)
 
 From a web browser on your workstation, navigate to the IP address or hostname of the Virtual Machine hosting the AWX containers (if using an Azure VM, ensure it has a Public IP or is deployed to a Subnet that is accessible from your workstation). You will be see the AWX login page and should authenticate using the default `admin` username and password (if you didn't previously set custom values in the AWX installer's *inventory* file):
 
@@ -213,8 +213,8 @@ Username: admin
 Password: password
 ```
 
-![AWX successful install](images/powershell-awx/awx-successful-install.png)
+![AWX successful install](images/awx-successful-install.png)
 
 ## Running PowerShell 7 scripts on AWX
 
-See [part 2](/posts/powershell-awx-02) of this series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.
+See [part 2](posts/powershell-awx-02) of this series to learn how to execute PowerShell within Ansible Playbooks, run full PowerShell scripts from AWX, and see best practices for output and error handling.

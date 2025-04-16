@@ -74,7 +74,7 @@ To start using the Azure Tables REST API interactively, open a PowerShell sessio
 
 My identity has been granted the *Storage Table Data Contributor* Role at the Storage Account scope. This assignment allows my identity to both read and write **all** Entities within **all** Tables in the Storage Account.
 
-![Azure Table Storage user RBAC Role](images/az-storage-tables-rest-powershell/storage-rbac-data-user-role.png)
+![Azure Table Storage user RBAC Role](images/storage-rbac-data-user-role.png)
 
 ### Automated
 
@@ -82,11 +82,11 @@ The following example uses an Azure Automation Account.
 
 To start using the Azure Tables REST API in an unattended configuration, [create an Automation Account](https://learn.microsoft.com/en-us/azure/automation/quickstarts/create-azure-automation-account-portal) and [enabled the Managed Identity](https://learn.microsoft.com/en-us/azure/automation/quickstarts/enable-managed-identity).
 
-![Azure Automation Account Managed Identity](images/az-storage-tables-rest-powershell/aa-managed-identity.png)
+![Azure Automation Account Managed Identity](images/aa-managed-identity.png)
 
 Then, assign the Managed Identity the *Storage Table Data Contributor* Role at the Storage Account scope. This assignment allows the Automation Account to both read and write **all** Entities within **all** Tables in the Storage Account.
 
-![Azure Table Storage MI RBAC Role](images/az-storage-tables-rest-powershell/storage-rbac-data-mi-role.png)
+![Azure Table Storage MI RBAC Role](images/storage-rbac-data-mi-role.png)
 
 Finally, [create a PowerShell Runbook](https://learn.microsoft.com/en-us/azure/automation/manage-runbooks#create-a-runbook) within the Automation Account. Add the following code to the top of the Runbook:
 
@@ -159,11 +159,11 @@ Invoke-RestMethod -Method Post -Uri "https://$StorageAccount.table.core.windows.
 
 The REST API will respond with a [PSCustomObject](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-pscustomobject?view=powershell-7.3) representation of the new Entity.
 
-![PowerShell Create Entity response](images/az-storage-tables-rest-powershell/ps-response-create.png)
+![PowerShell Create Entity response](images/ps-response-create.png)
 
 You can view the Entity within the Azure Portal or the [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
-![Azure Table Create Entity result](images/az-storage-tables-rest-powershell/table-entity-create.png)
+![Azure Table Create Entity result](images/table-entity-create.png)
 
 #### Get Entity
 
@@ -196,7 +196,7 @@ Invoke-RestMethod -Method Get -Uri "https://$StorageAccount.table.core.windows.n
 
 The REST API will respond with a [PSCustomObject](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-pscustomobject) representation of the Entity.
 
-![PowerShell Get Entity response](images/az-storage-tables-rest-powershell/ps-response-get.png)
+![PowerShell Get Entity response](images/ps-response-get.png)
 
 #### Query Entities
 
@@ -233,7 +233,7 @@ Invoke-RestMethod -Method Get -Uri "https://$StorageAccount.table.core.windows.n
 
 The REST API will respond with an array of [PSCustomObjects](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-pscustomobject) representing the Entities.
 
-![PowerShell Query Entities response](images/az-storage-tables-rest-powershell/ps-response-query.png)
+![PowerShell Query Entities response](images/ps-response-query.png)
 
 ##### Get all Entities in a Table
 
@@ -269,7 +269,7 @@ $TableRecords += while ($TableResponse.Headers.'x-ms-continuation-NextPartitionK
 
 The REST API will respond with an array of [PSCustomObjects](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-pscustomobject) representing the Entities.
 
-![PowerShell all Entities response](images/az-storage-tables-rest-powershell/ps-response-all.png)
+![PowerShell all Entities response](images/ps-response-all.png)
 
 #### Update Entity
 
@@ -309,7 +309,7 @@ The REST API will not provide a response message for Entity update operations.
 
 You can view the updated Entity within the Azure Portal or the [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
-![Azure Table Update Entity result](images/az-storage-tables-rest-powershell/table-entity-update.png)
+![Azure Table Update Entity result](images/table-entity-update.png)
 
 #### Remove Entity
 
@@ -345,7 +345,7 @@ The REST API will not provide a response message for Entity delete operations.
 
 You can view the results of the Entity removal within the Azure Portal or the [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
-![Azure Table Remove Entity result](images/az-storage-tables-rest-powershell/table-entity-remove.png)
+![Azure Table Remove Entity result](images/table-entity-remove.png)
 
 ## Next Steps
 

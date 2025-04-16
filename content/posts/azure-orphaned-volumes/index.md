@@ -18,7 +18,7 @@ Detecting orphaned volumes (disks which are not attached to any virtual machine)
 
 In a large-scale, constantly changing Azure environment consisting of thousands of virtual machines, inevitably some resources will be left behind. Whether its due to incomplete manual cleanup, a forgotten PoC, or a platform migration, virtual machine data disks (and even operating system disks) are sometimes left behind after their parent virtual machine is removed or repurposed. If left unaccounted for, these disks will continue to generate cost every month whether they are used or not. Orphaned disks can be viewed in the Azure Portal by looking for disks whose **Owner** is listed as `-`.
 
-![Orphaned Azure Disks in the Azure Portal](images/azure-orphaned-volumes/orphaned-vols-portal.png "Orphaned Azure Disks in the Azure Portal")
+![Orphaned Azure Disks in the Azure Portal](images/orphaned-vols-portal.png "Orphaned Azure Disks in the Azure Portal")
 
 Getting a list of disks from the Azure Portal is useful, but doesn't work as well for scheduled operations such as weekly reports. I don't want to have to log in to the portal, pull up the list of Disks, filter to the ones that are orphaned, and click the **Export to CSV** button every Monday morning for the rest of time. Let's automate this.
 
@@ -38,11 +38,11 @@ resources
 
 If you want instant visibility into your environment's orphaned volumes, you can pin the results of an Azure Resource Graph query to your private or shared Azure Dashboard(s). The results will be updated based on the refresh frequency you set for the dashboard. To do this, perform the following steps:
 
-![Save Azure Resource Graph query](images/azure-orphaned-volumes/orphaned-vols-query-save.png "Save Azure Resource Graph query to your library")
+![Save Azure Resource Graph query](images/orphaned-vols-query-save.png "Save Azure Resource Graph query to your library")
 
-![Pin Azure Resource Graph query results to your Dashboard](images/azure-orphaned-volumes/orphaned-vols-query-pin.png "Pin Azure Resource Graph query results to your Dashboard")
+![Pin Azure Resource Graph query results to your Dashboard](images/orphaned-vols-query-pin.png "Pin Azure Resource Graph query results to your Dashboard")
 
-![View the results in your Dashboard](images/azure-orphaned-volumes/orphaned-vols-dashboard.png "View the results in your Dashboard")
+![View the results in your Dashboard](images/orphaned-vols-dashboard.png "View the results in your Dashboard")
 
 ## Query Azure Resource Graph with PowerShell
 
@@ -64,7 +64,7 @@ By default, the script will write the results of the Azure Resource Graph query 
 ./Get-AzOrphanedVolumes.ps1
 ```
 
-![Orphaned Azure Disks in the PowerShell console](images/azure-orphaned-volumes/orphaned-vols-stdout.png "Orphaned Azure Disks in the PowerShell console")
+![Orphaned Azure Disks in the PowerShell console](images/orphaned-vols-stdout.png "Orphaned Azure Disks in the PowerShell console")
 
 By default, the script will search **all Azure Subscriptions within the current Azure AD Tenant** that the Azure AD Identity running the script has access to. Alternatively, you can specify the `-Subscriptions` parameter to limit the search to one or more Azure Subscriptions by name.
 
@@ -80,9 +80,9 @@ Just like the Azure Portal and Azure Resource Graph Explorer, you can use the sc
 ./Get-AzOrphanedVolumes.ps1 -GenerateReport
 ```
 
-![Orphaned Azure Disks in a CSV report in Excel](images/azure-orphaned-volumes/orphaned-vols-excel.png "Orphaned Azure Disks report in Excel")
+![Orphaned Azure Disks in a CSV report in Excel](images/orphaned-vols-excel.png "Orphaned Azure Disks report in Excel")
 
-![Orphaned Azure Disks in a CSV report](images/azure-orphaned-volumes/orphaned-vols-report.png "Orphaned Azure Disks report in Finder")
+![Orphaned Azure Disks in a CSV report](images/orphaned-vols-report.png "Orphaned Azure Disks report in Finder")
 
 By default, the report is exported to the root of your user profile (`C:\Users\<username>\` on Windows or `Users/<username/` on MacOS), but you can specify a custom filesystem path by including the `-OutFile` parameter.
 

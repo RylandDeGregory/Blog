@@ -35,7 +35,7 @@ The manner by which arbitrary online services are able to export Spotify user li
 
 I want to export my Spotify library and playlists on a schedule for two reasons: so I always know when my backup will run, and so I can have point-in-time "snapshots" of my Spotify profile, enabling me to see how my taste changes over time. However, I don't want to maintain, update, and patch a VM for it to just sit around 99.99% of the time waiting for my scheduled job to run. Likewise, I don't want to have to configure an entire PaaS automation service just to execute a simple PowerShell script, or pay for a relational database service just to store [CSV data](https://en.wikipedia.org/wiki/Comma-separated_values). Enter Azure Functions and its Azure Blob Storage output binding.
 
-![Spotify Exporter Solution Architecture Diagram](images/spotify-exporter/spotify-exporter-arch-diag.png "Solution Architecture Diagram")
+![Spotify Exporter Solution Architecture Diagram](images/spotify-exporter-arch-diag.png "Solution Architecture Diagram")
 
 ### Azure Functions
 
@@ -45,7 +45,7 @@ I want to export my Spotify library and playlists on a schedule for two reasons:
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's storage service that offers near-infinite object storage within the Azure cloud. Think of it as an unlimited "Dropbox" or "Google Drive" that you can use to store any type of data, and can be integrated seamlessly with other Azure services like Azure Functions. Blob Storage is perfect to store the CSV files that our Functions generate because it's simple to use and -- like Azure Functions -- it's [nearly free](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/). Given that my library of nearly 2,000 songs only takes up 500kb per weekly export, the space to store your Spotify backups won't break the bank either.
 
-![Spotify Library Export File Size](images/spotify-exporter/library-export-size.png "Spotify Library Export File Size")
+![Spotify Library Export File Size](images/library-export-size.png "Spotify Library Export File Size")
 
 ### Azure Key Vault
 
@@ -75,8 +75,8 @@ Given that you are reading an article like this one, and have made it this far, 
 
 To authenticate to the Spotify Web API, your Azure Functions need two things: application credentials and user credentials. Application credentials are granted by [registering an App](https://developer.spotify.com/documentation/general/guides/app-settings/) with your Spotify Developer account. Once you have the Client ID and Client Secret, you should [store them in Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-portal) as Secrets named `Spotify-ClientID` and `Spotify-ClientSecret`, respectively.
 
-![Spotify App registration](images/spotify-exporter/app-registration.png "Spotify registered app Client ID and Client Secret")
-![Azure Key Vault Secrets](images/spotify-exporter/akv-secrets.png "Spotify app secrets stored in AKV")
+![Spotify App registration](images/app-registration.png "Spotify registered app Client ID and Client Secret")
+![Azure Key Vault Secrets](images/akv-secrets.png "Spotify app secrets stored in AKV")
 
 #### Use the Authorization Code Flow to obtain an OAuth 2 Refresh Token
 
@@ -94,14 +94,14 @@ Once your Spotify App is registered and you have granted the application access 
 
 Fill out the basic settings, create a new Storage Account that will store your exported data, and make sure that you're using the **Consumption (serverless)** plan. Leave the rest of the values as their defaults and click Create. (Click on the screenshots below to view larger size)
 
-![Function App Basics](images/spotify-exporter/functionapp-create-1.png "Function App Basics")
-![Function App Hosting](images/spotify-exporter/functionapp-create-2.png "Function App Hosting")
+![Function App Basics](images/functionapp-create-1.png "Function App Basics")
+![Function App Hosting](images/functionapp-create-2.png "Function App Hosting")
 
 #### Configure the Function App
 
 Navigate to the new Function App and then to the **Configuration** blade. Add a new [Application Setting](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings?tabs=portal#settings) named `KEY_VAULT_NAME` and set the value to the name of your Azure Key Vault. This Application Setting is used to tell the PowerShell code which Key Vault to look for the Spotify API Secrets in.
 
-![Function App Application Setting](images/spotify-exporter/function-app-settings.png "Function App Setting containing Key Vault name")
+![Function App Application Setting](images/function-app-settings.png "Function App Setting containing Key Vault name")
 
 Now, navigate to the **Identity** blade and enable the System assigned [Managed Identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview) for the Function App. Copy the **Object ID** of the Managed Identity to your clipboard.
 
@@ -109,13 +109,13 @@ Now, navigate to the **Identity** blade and enable the System assigned [Managed 
 
 Within the Azure Portal, navigate to the Resource page for your Azure Key Vault. Go to the **Access policies** blade and click "+ Add Access Policy". Add *Get* within Secret permissions, then "Select principal" and paste in the **Object ID** of the Function App's Managed Identity. Click "Add", then "Save" to add the Access Policy.
 
-![Key Vault Function App RBAC](images/spotify-exporter/kv-functionapp-ap.png "Grant the Function App access to interact with the Key Vault.")
+![Key Vault Function App RBAC](images/kv-functionapp-ap.png "Grant the Function App access to interact with the Key Vault.")
 
 ### Clone the SpotifyExporter git repo
 
 If you haven't already, navigate to the [SpotifyExporter](https://github.com/RylandDeGregory/SpotifyExporter) GitHub repo and [clone it to your local machine](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) using VS Code. You'll also need the [Azure Functions Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions).
 
-![Clone Git Repo](images/spotify-exporter/clone-git-repo.png "Clone Git repository with VS Code")
+![Clone Git Repo](images/clone-git-repo.png "Clone Git repository with VS Code")
 
 {{% admonition type=tip title="Modify which attributes are returned from the Spotify API" open=false %}}
 
@@ -129,16 +129,16 @@ If you want to export more, less, or different attributes, you can! First, deter
 
 If you are happy with the code, you can publish the local Azure Functions Project to the Function App you previously created. From the Azure Functions extension, select your Subscription, then your Function App. Click **Deploy to Function App...** and follow any prompts within VS Code.
 
-![Publish Azure Function App](images/spotify-exporter/publish-function-app.png "Publish local Azure Functions Project to Function App")
+![Publish Azure Function App](images/publish-function-app.png "Publish local Azure Functions Project to Function App")
 
 ## Results and next steps
 
 Now that you have your Spotify Exporter Functions up and running, they will (on a weekly basis) export your Spotify user library and all playlists to two CSV files within the Azure Storage Account you created with the Function App. The files will be in a blob container named `spotify`, and will be named based on the date and time the export ran.
 
-![Storage Account Results](images/spotify-exporter/storage-account-results.png "Export CSV files within Azure Blob Storage container")
+![Storage Account Results](images/storage-account-results.png "Export CSV files within Azure Blob Storage container")
 
-![Sample Library Export File](images/spotify-exporter/library-export-csv.png "Sample Spotify Library Export CSV")
+![Sample Library Export File](images/library-export-csv.png "Sample Spotify Library Export CSV")
 
 You can also trigger either of the Functions on-demand by opening the Azure Functions extension and *Right-Clicking* on the name of the Function you want to execute.
 
-![Execute Function Ad-Hoc](images/spotify-exporter/execute-function-adhoc.png "Execute Azure Function Ad-Hoc from VS Code")
+![Execute Function Ad-Hoc](images/execute-function-adhoc.png "Execute Azure Function Ad-Hoc from VS Code")
