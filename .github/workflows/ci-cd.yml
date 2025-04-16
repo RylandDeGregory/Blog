@@ -30,7 +30,7 @@ jobs:
 
     - name: Generate Blog
       run: |
-        hugo --log -v
+        hugo --logLevel debug
 
     # Prevent hugo deploy from deleting files with '--maxDeletes -1'
     - name: Deploy Blog
