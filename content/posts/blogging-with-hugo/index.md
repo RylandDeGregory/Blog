@@ -28,7 +28,7 @@ Because static websites are purely flat files, you can use a version-control sys
 
 #### CI/CD pipelines, automated deployment, release artifacting
 
-As a DevOps engineer by trade, I love the idea of repeatable, commutable builds that run, look and feel the same anytime and anywhere. Because static site generators create static HTML files, you can run your blog through your pipeline tool of choice for integration testing, deployment to your hosting platform, promotion between environments, and packaging the whole site an archivable artifact. See [part 2](posts/blogging-with-hugo-2/) for more information on this.
+As a DevOps engineer by trade, I love the idea of repeatable, commutable builds that run, look and feel the same anytime and anywhere. Because static site generators create static HTML files, you can run your blog through your pipeline tool of choice for integration testing, deployment to your hosting platform, promotion between environments, and packaging the whole site an archivable artifact. See [part 2](posts/blogging-with-hugo-2) for more information on this.
 
 ---
 
