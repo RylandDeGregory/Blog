@@ -28,7 +28,7 @@ Because static websites are purely flat files, you can use a version-control sys
 
 #### CI/CD pipelines, automated deployment, release artifacting
 
-As a DevOps engineer by trade, I love the idea of repeatable, commutable builds that run, look and feel the same anytime and anywhere. Because static site generators create static HTML files, you can run your blog through your pipeline tool of choice for integration testing, deployment to your hosting platform, promotion between environments, and packaging the whole site an archivable artifact. See [part 2](posts/blogging-with-hugo-2) for more information on this.
+As a DevOps engineer by trade, I love the idea of repeatable, commutable builds that run, look and feel the same anytime and anywhere. Because static site generators create static HTML files, you can run your blog through your pipeline tool of choice for integration testing, deployment to your hosting platform, promotion between environments, and packaging the whole site an archivable artifact. See [part 2](../blogging-with-hugo-2) for more information on this.
 
 ---
 
@@ -156,7 +156,7 @@ To use this theme, you need to include its custom configuration in your `config.
 This website was made for blogging, right? Make a post!
 
 ```Bash
-hugo new "posts/myfirstpost.md"
+hugo new "../myfirstpost.md"
 ```
 
 When the new file is created, Hugo places a header which contains metadata about the post.
@@ -223,6 +223,6 @@ Go view the site at the custom domain attached to the Azure CDN endpoint!
 
 ## Next Steps
 
-Check out [Part 2](posts/blogging-with-hugo-2) to set up a CI/CD Pipeline on Azure Pipelines and configure monitoring for the static site.
+Check out [Part 2](../blogging-with-hugo-2) to set up a CI/CD Pipeline on Azure Pipelines and configure monitoring for the static site.
 
 Happy {cheap} blogging!
