@@ -1,5 +1,6 @@
 version: 2
 updates:
+  # Theme build tooling.
   - package-ecosystem: "npm"
     directory: "/themes/LoveIt"
     schedule:
@@ -8,11 +9,14 @@ updates:
     open-pull-requests-limit: 1
     labels:
       - "dependencies"
-      - "npm"
+    commit-message:
+      prefix: "chore(deps)"
     groups:
-      all:
+      npm:
         patterns:
           - "*"
+
+  # Actions used by CI/CD workflows (.github/workflows).
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -21,21 +25,9 @@ updates:
     open-pull-requests-limit: 1
     labels:
       - "dependencies"
-      - "gha"
+    commit-message:
+      prefix: "chore(deps)"
     groups:
-      all:
-        patterns:
-          - "*"
-  - package-ecosystem: "gomod"
-    directory: "/themes/LoveIt"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 1
-    labels:
-      - "dependencies"
-      - "go"
-    groups:
-      all:
+      github-actions:
         patterns:
           - "*"
