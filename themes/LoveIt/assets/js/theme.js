@@ -62,8 +62,8 @@ var Util = /*#__PURE__*/function () {
 var Theme = /*#__PURE__*/function () {
   function Theme() {
     _classCallCheck(this, Theme);
-    this.config = window.config;
-    this.data = this.config.data;
+    this.config = window.config || {};
+    this.data = this.config.data || {};
     this.isDark = document.body.getAttribute('theme') === 'dark';
     this.newScrollTop = Util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;
@@ -128,9 +128,15 @@ var Theme = /*#__PURE__*/function () {
       var _this2 = this;
       Util.forEach(document.getElementsByClassName('theme-switch'), function ($themeSwitch) {
         $themeSwitch.addEventListener('click', function () {
-          if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');else document.body.setAttribute('theme', 'dark');
-          _this2.isDark = !_this2.isDark;
-          window.localStorage && localStorage.setItem('theme', _this2.isDark ? 'dark' : 'light');
+          var _window$localStorage;
+          var cfgTheme = document.body.getAttribute('cfg-theme');
+          var theme = document.body.getAttribute('theme');
+          var themes = ['auto', 'light', 'dark'];
+          var newTheme = themes[(themes.indexOf(cfgTheme) + 1) % themes.length];
+          _this2.isDark = newTheme === 'dark' || newTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.body.setAttribute('theme', _this2.isDark ? 'dark' : 'light');
+          document.body.setAttribute('cfg-theme', newTheme);
+          (_window$localStorage = window.localStorage) === null || _window$localStorage === void 0 || _window$localStorage.setItem('theme', newTheme);
           var _iterator = _createForOfIteratorHelper(_this2.switchThemeEventSet),
             _step;
           try {
@@ -357,7 +363,7 @@ var Theme = /*#__PURE__*/function () {
               _objectDestructuringEmpty(_ref7);
               var _ref8 = searchConfig.type === 'algolia' ? {
                   searchType: 'algolia',
-                  icon: '<i class="fab fa-algolia fa-fw" aria-hidden="true"></i>',
+                  icon: '<i class="fab fa-algolia" aria-hidden="true"></i>',
                   href: 'https://www.algolia.com/'
                 } : {
                   searchType: 'Lunr.js',

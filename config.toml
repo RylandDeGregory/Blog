@@ -134,11 +134,10 @@ defaultMarkdownHandler = "goldmark"
 [author]
   name = "Ryland DeGregory"
   email = "ryland@rylanddegregory.com"
-  twitter = "rcdeg"
   website = "https://ryland.dev/about"
 
 [privacy]
-  [privacy.twitter]
+  [privacy.x]
     enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
