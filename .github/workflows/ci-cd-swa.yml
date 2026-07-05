@@ -30,6 +30,11 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         env:
           HUGO_VERSION: 0.145.0
+          # Tell git to trust the Oryx build container workspace so Hugo's
+          # enableGitInfo can read the repo without a "dubious ownership" error.
+          GIT_CONFIG_COUNT: 1
+          GIT_CONFIG_KEY_0: safe.directory
+          GIT_CONFIG_VALUE_0: /github/workspace
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
