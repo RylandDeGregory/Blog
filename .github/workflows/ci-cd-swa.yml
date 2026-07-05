@@ -10,26 +10,43 @@ on:
     - master
   workflow_dispatch:
 
+env:
+  hugoVersion: '0.145.0'
+
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      # Full history so Hugo's enableGitInfo resolves accurate .Lastmod/.GitInfo per page.
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
+          submodules: true
           fetch-depth: 0
+
+      - name: Download Hugo
+        run: |
+          wget -c 'https://github.com/gohugoio/hugo/releases/download/v${{ env.hugoVersion }}/hugo_extended_withdeploy_${{ env.hugoVersion }}_linux-amd64.deb'
+      - name: Install Hugo
+        run: |
+          sudo dpkg -i hugo_extended_withdeploy_${{ env.hugoVersion }}_linux-amd64.deb
+
+      # Build on the runner (where git trusts the checkout) so enableGitInfo works,
+      # avoiding the Oryx container's "dubious ownership" error.
+      - name: Generate Blog
+        run: |
+          hugo --minify
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@4d27395796ac319302594769cfe812bd207490b1 # v1
         with:
           action: "upload"
-          app_location: "/"
+          app_location: "public"
+          skip_app_build: true
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          output_location: "public"
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          HUGO_VERSION: 0.145.0
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
