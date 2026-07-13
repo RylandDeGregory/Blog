@@ -4,7 +4,7 @@
   "description": "LoveIt theme source file",
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^8.0.1",
+    "@babel/cli": "^8.0.4",
     "@babel/core": "^8.0.1",
     "@babel/preset-env": "^8.0.2",
     "babelify": "^10.0.0",
