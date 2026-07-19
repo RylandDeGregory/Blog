@@ -131,9 +131,9 @@ defaultMarkdownHandler = "goldmark"
     startLevel = 2
     endLevel = 6
 
-[author]
+[params.author]
   name = "Ryland DeGregory"
-  email = "ryland@rylanddegregory.com"
+  email = "contact@ryland.dev"
   website = "https://ryland.dev/about"
 
 [privacy]
@@ -141,26 +141,3 @@ defaultMarkdownHandler = "goldmark"
     enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
-
-[deployment]
-  order = [".jpg$", ".gif$"]
-  [[deployment.targets]]
-  name = "azure blob storage"
-
-  # see https://gocloud.dev/howto/blob/#azure
-  URL = "azblob://$web"
-
-  [[deployment.matchers]]
-    # cache static assets for 1 year.
-    pattern = "^.+\\.(js|css|svg|ttf)$"
-    cacheControl = "max-age=31536000, no-transform, public"
-    gzip = true
-
-    [[deployment.matchers]]
-    pattern = "^.+\\.(png|jpg)$"
-    cacheControl = "max-age=31536000, no-transform, public"
-    gzip = false
-
-    [[deployment.matchers]]
-    pattern = "^.+\\.(html|xml|json)$"
-    gzip = true
