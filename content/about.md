@@ -13,7 +13,7 @@ My previous experience spans media, education, web, manufacturing, financial ser
 
 I'm currently employed as a Cloud Architect/Platform Engineer, designing and delivering enterprise-scale GenAI services on Microsoft Azure.
 
-Outside technology, I love electronic music, coding, hiking, and traveling. I have a voracious propensity for organization -- both digitally and physically -- and spend my free time with my girlfriend and a great group of friends. I'm very proud of my highly-curated [Spotify playlists](https://open.spotify.com/user/cale1008/playlists), and have recently enjoyed producing [DJ mixes](https://soundcloud.com/ryland-degregory) and working on my technical writing through this blog. Thanks for reading!
+Outside technology, I love electronic music, coding, hiking, and traveling. I have a voracious propensity for organization -- both digitally and physically -- and spend my free time with my partner and a great group of friends. I'm very proud of my highly-curated [Spotify playlists](https://open.spotify.com/user/cale1008/playlists), and have recently enjoyed producing [DJ mixes](https://soundcloud.com/ryland-degregory) and working on my technical writing through this blog. Thanks for reading!
 
 ### Resume
 
