@@ -13,6 +13,11 @@ updates:
       prefix: "chore(deps)"
     groups:
       npm:
+        applies-to: "version-updates"
+        patterns:
+          - "*"
+      npm-security:
+        applies-to: "security-updates"
         patterns:
           - "*"
 
