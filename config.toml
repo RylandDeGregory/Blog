@@ -93,9 +93,16 @@ enableEmoji = true
       maxShownLines = 20
     [params.page.share]
       enable = true
-      Twitter = true
+      Baidu = false
+      Diaspora = false
       Facebook = true
+      HackerNews = true
+      Line = false
       Linkedin = true
+      Telegram = true
+      Threads = true
+      Twitter = true
+      Weibo = false
     [params.page.comment]
       enable = false
 
