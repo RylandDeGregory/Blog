@@ -90,7 +90,7 @@ enableEmoji = true
       keepStatic = false
     [params.page.code]
       copy = true
-      maxShownLines = 20
+      maxShownLines = 5
     [params.page.share]
       enable = true
       Baidu = false
