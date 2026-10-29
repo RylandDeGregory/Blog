@@ -30,11 +30,11 @@ Microsoft's solution (and its attempt to impact the market) is the [AI Gateway t
 
 Following the trend of other new "Azure in the AI age" services, including Microsoft Foundry, Azure Container Apps, and Web IQ, the APIM AI Gateway tier gets its own external vibe-coded purple and blue gradient portal: [ai.gateway.azure.com](https://ai.gateway.azure.com/). Today, during preview, the expected ways to interact with the service are exclusively through that portal and through coding agents using the AI Gateway skills. Neither of these work well for enterprise IT teams that manage their cloud infrastructure exclusively via IaC (as everyone should strive to do... ClickOps == bad).
 
-Ever the early adopter, I've been eager to get up to speed on the new operating model of the AI Gateway tier compared to "traditional" APIM. No API specs to upload, XML policies to write (*thank goodness*), or backends to manage. In this new world, we have three main primitives: providers, models, and aliases. That sounds a lot better already...
+Ever the early adopter, I've been eager to get up to speed on the AI Gateway tier's new operating model compared to "traditional" APIM: No API specs to find and edit (enigmatically, OpenAPI != APIM-compatible OpenAPI), no XML policies to write (*thank goodness*), no backend pools to manage. In this new world, we have three main primitives: providers, models, and aliases. That sounds a lot better already...
 
-After following the [Microsoft quickstart](https://ai.gateway.azure.com/docs/quickstarts/portal), I spent an hour clicking around the portal before getting frustrated with having to go back and forth between screens to test different configurations, waiting for the UI to catch up to my navigation, and breaking things by navigating to pages and modals in unexpected orders. I gave up. I need automation. I need IaC.
+After following the [Microsoft quickstart](https://ai.gateway.azure.com/docs/quickstarts/portal), I spent an hour clicking around the portal and was able to get a Foundry provider set up and call a GPT model. But it wasn't much longer before I began getting frustrated with having to go back and forth between screens to test different configurations, waiting for the UI to catch up to my navigation, and breaking things by navigating to pages and modals in unexpected orders. I gave up. I need automation. I need IaC.
 
-Unfortunately, Microsoft doesn't publish any Bicep or Terraform documentation for the new resource SKU (yes, it's simply a different SKU of the existing `Microsoft.ApiManagement/services` ARM resource), Azure CLI command group, Azure PowerShell module, or even a [REST API spec](https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/specification/apimanagement/resource-manager/Microsoft.ApiManagement/ApiManagement/preview/2025-09-01-preview/openapi.json) (seriously, try to CTRL+F that spec for `modelProvider` or `alias`). I only discovered the Resource Provider API version it uses (`2025-09-01-preview`) by opening the JSON view of the service in the (real) Azure Portal. Once I found that, I knew what the next logical step was: reverse-engineer the AI Gateway portal so I could extract the ARM entities it creates and manages into a repeatable, versioned, testable Bicep template.
+Unfortunately, Microsoft doesn't publish any Bicep or Terraform documentation for the new resource SKU (yes, it's simply a different SKU of the existing `Microsoft.ApiManagement/services` ARM resource with a stripped down feature set), Azure CLI command group, Azure PowerShell module, or even a [REST API spec](https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/specification/apimanagement/resource-manager/Microsoft.ApiManagement/ApiManagement/preview/2025-09-01-preview/openapi.json) (seriously, try to CTRL+F that spec for `modelProvider` or `alias`). I only discovered the Resource Provider API version it uses (`2025-09-01-preview`) by opening the JSON view of the service in the (real) Azure Portal. Once I found that, I knew what the next logical step was: reverse-engineer the AI Gateway portal so I could extract the ARM entities it creates and manages into a repeatable, versioned, testable Bicep template.
 
 ### Beyond the Bicep bleeding edge
 
@@ -128,15 +128,58 @@ api-key = "AZURE_AI_GATEWAY_API_KEY"
 
 #### App
 
-Not supported at this time, due to a lack of support for custom auth headers. [GitHub issue](https://github.com/github/copilot-cli/issues/3399).
+Sadly, the GitHub Copilot App doesn't currently support secure storage of Custom Provider API Headers.
+
+You *can* get it working by configuring a Custom Endpoint provider with the following settings:
+
+- **Display name:** `Azure AI Gateway`
+- **Base URL:** `https://<aiGatewayEndpoint>/default/models/openai/v1`
+- **Wire API:** `responses`
+- **Custom headers (JSON):** `{"api-key": "<gateway API key>"}`
+
+And then add a Model with the following settings:
+
+- **Model ID:** `luna`
+- **Display name:** `GPT-6 Luna`
+
+But, don't get too excited. Your gateway API key will sit in the app's runtime config in plaintext. Which is...sub-optimal, and definitely not recommended.
 
 #### CLI
 
-Not supported at this time, due to a lack of support for custom auth headers. [GitHub issue](https://github.com/github/copilot-cli/issues/3399).
+Update your GitHub Copilot [environment variables](https://github.com/copilot-dev-days/copilot-cli-deep-dive-workshop/blob/main/docs/workshop/13-configuration.md?utm_source=chatgpt.com#environment-variables-reference) with the following values.
+
+```shell
+export COPILOT_PROVIDER_BASE_URL='https://<aiGatewayEndpoint>/default/models/openai/v1'
+export COPILOT_PROVIDER_HEADERS="api-key:${AZURE_AI_GATEWAY_API_KEY}"
+export COPILOT_PROVIDER_TYPE='openai'
+export COPILOT_PROVIDER_WIRE_API='responses'
+export COPILOT_PROVIDER_WIRE_MODEL='luna'
+export COPILOT_PROVIDER_MODEL_ID='GPT-6 Luna'
+```
+
+```powershell
+$env:COPILOT_PROVIDER_BASE_URL = 'https://<aiGatewayEndpoint>/default/models/openai/v1'
+$env:COPILOT_PROVIDER_HEADERS = "api-key:$env:AZURE_AI_GATEWAY_API_KEY"
+$env:COPILOT_PROVIDER_TYPE = 'openai'
+$env:COPILOT_PROVIDER_WIRE_API = 'responses'
+$env:COPILOT_PROVIDER_WIRE_MODEL = 'luna'
+$env:COPILOT_PROVIDER_MODEL_ID = 'GPT-6 Luna'
+```
+
+For working with Gemini, use the following values
+
+```powershell
+$env:COPILOT_PROVIDER_BASE_URL = 'https://<aiGatewayEndpoint>/default/models/v1'
+$env:COPILOT_PROVIDER_HEADERS = "api-key:$env:AZURE_AI_GATEWAY_API_KEY"
+$env:COPILOT_PROVIDER_TYPE = 'openai'
+$env:COPILOT_PROVIDER_WIRE_API = 'completions'
+$env:COPILOT_PROVIDER_WIRE_MODEL = 'gemini'
+$env:COPILOT_PROVIDER_MODEL_ID = 'Gemini 3.5 Flash Lite'
+```
 
 #### VS Code
 
-Update your [VS Code chatLangageModels.json](https://code.visualstudio.com/docs/agent-customization/language-models#_bring-your-own-language-model-key) with the following values.
+Update your [VS Code chatLanguageModels.json](https://code.visualstudio.com/docs/agent-customization/language-models#_bring-your-own-language-model-key) with the following values.
 
 I recommend setting the provider up using the interactive flow, which generates the secure `input:chat.lm.secret` value for the API key. You can then edit the Custom Endpoint Provider in the JSON to make other changes.
 
@@ -159,13 +202,38 @@ I recommend setting the provider up using the interactive flow, which generates 
                 "vision": true,
                 "maxInputTokens": 922000,
                 "maxOutputTokens": 128000
+            },
+            {
+                "apiType": "chat-completions",
+                "id": "gemini",
+                "name": "Gemini 3.5 Flash Lite",
+                "url": "https://<aiGatewayEndpoint>/default/models/v1",
+                "requestHeaders": {
+                    "api-key": "${apiKey}"
+                },
+                "toolCalling": true,
+                "vision": true,
+                "maxInputTokens": 922000,
+                "maxOutputTokens": 128000
+            },
+            {
+                "id": "sonnet",
+                "name": "Claude Sonnet 5.5",
+                "url": "https://<aiGatewayEndpoint>/default/models/anthropic/v1",
+                "requestHeaders": {
+                    "api-key": "${apiKey}"
+                },
+                "toolCalling": true,
+                "vision": true,
+                "maxInputTokens": 922000,
+                "maxOutputTokens": 128000
             }
         ]
     }
 ]
 ```
 
-To use the Custom Endpoint Provider in the VS Code Agents window, set `"chat.agentHost.byokModels.enabled": true` in VS Code's `settings.json`.
+To use the Custom Endpoint provider in the VS Code Agents window, set `"chat.agentHost.byokModels.enabled": true` in VS Code's [`settings.json`](https://code.visualstudio.com/docs/configure/settings).
 
 ### OpenCode
 
@@ -189,10 +257,48 @@ This configuration works for both OpenCode CLI and Desktop.
             },
             "models": {
                 "luna": {
-                    "name": "Luna",
+                    "name": "GPT-6 Luna",
                     "modelID": "luna"
                 }
             }
+        },
+        "azure_ai_gateway_anthropic": {
+            "name": "Azure AI Gateway (Anthropic)",
+            "package": "@opencode/ai/providers/anthropic",
+            "settings": {
+                "baseURL": "https://<aiGatewayEndpoint>/default/models/anthropic/v1"
+            },
+            "headers": {
+                "api-key": "{env:AZURE_AI_GATEWAY_API_KEY}"
+            },
+            "models": {
+                "sonnet": {
+                    "name": "Claude Sonnet 5.5",
+                    "modelID": "sonnet"
+                }
+            }
+        }
+    }
+}
+```
+
+I was unable to get the Google AI Studio provider to work in OpenCode, seemingly due to [this GitHub issue](https://github.com/anomalyco/opencode/issues/45113). The provider config I tried with is below for reference, in case a future version fixes the problem.
+
+```json
+"azure_ai_gateway_chat_completions": {
+    "name": "Azure AI Gateway (Gemini)",
+    "package": "@opencode/ai/providers/openai/chat",
+    "settings": {
+        "baseURL": "https://aigw-x2cetz6c.azure-api.net/default/models/v1",
+        "setCacheKey": false
+    },
+    "headers": {
+        "api-key": "{env:AZURE_AI_GATEWAY_API_KEY}"
+    },
+    "models": {
+        "gemini": {
+            "name": "Gemini 3.5 Flash Lite",
+            "modelID": "gemini"
         }
     }
 }
