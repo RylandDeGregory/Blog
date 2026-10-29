@@ -1,7 +1,7 @@
 ---
 title: "Use the Azure APIM AI Gateway"
 date: 2026-10-03T16:10:00-04:00
-draft: true
+draft: false
 author: "Ryland DeGregory"
 authorlink: "/about/"
 categories:
